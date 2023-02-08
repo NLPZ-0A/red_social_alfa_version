@@ -1,0 +1,72 @@
+<div class="post-section">
+<% if(posts){ %>
+    <% posts.forEach( function(post){ %>
+
+        <div class="post-container" id="post-div<%= post.id %>" name="<%= post.id %>">
+
+        <div class="user-profile">
+            <% if (post.profile_image_user == 'null') {%>
+                <a href="/profile/<%= post.username %>"> <img src="<%= post.profile_image_user%>" alt="img-avatar"> </a>
+            <% } else{%>
+                <a href="/profile/<%= post.username %>"> <img src="/img/user.png" > </a>
+            <% } %>
+
+            <div class="date-pub">
+                <p><a href="/profile/<%= post.username %>"><%= post.name %></a></p>
+                <span><%=post.date%></span>
+            </div>
+
+            <% if (currentUser.username === post.username) {%>
+                <div class="edit-post" data-submenu-id="<%= post.id %>">
+                    <a class="edit-icon" id ="<%= post.id %>"><i class="far fa-edit"></i></a>
+                </div>
+
+                <div class="post-menu-wrap" data-value-edit="<%= post.id %>">
+                    <div class="post-menu-button edit" data-edit-id="<%= post.id %>">
+                        <a> Editar post </a>
+                    </div>
+                    <hr>
+                    <div class="post-menu-button delete" data-delete-id="<%= post.id %>">
+                        <a> Eliminar post </a> 
+                    </div>
+                    <hr>
+                     <div class="post-menu-button close" id="close-window" data-close-id="<%= post.id %>">
+                        <a > Cerrar </a>
+                    </div>
+                </div>
+            <% } %>
+                
+        </div>
+        
+        <p class="post-text"><%= post.content %></p>
+
+        <% if(post.image !== '') {%>
+            <div  class="post-image">
+                <img src="<%= post.image %>">
+            </div>
+        <% } %>
+
+
+        <hr>
+            <div class="add-post-buttons"> 
+                <% if(!post.iLikePost) { %>   
+                    <div class="post-ico button-like like" id="<%= post.id %>" value="like" data-value="<%= post.id %>">
+                        <i class="fa-regular fa-thumbs-up"></i> Like <%= post.likesCount%>
+                    </div> 
+                <% }else { %>
+                    <div class="post-ico button-like unlike" id="<%= post.id %>" value="unlike" data-value="<%= post.id %>">
+                        <i class="fa-regular fa-thumbs-down"></i> like <%= post.likesCount %>
+                    </div>
+                <% } %>
+
+                <div class="post-ico comments">
+                    <i class="far fa-comment"></i></i> Comments 
+                </div> 
+
+                <div class="post-ico compartir"><i class="fa-solid fa-share"></i> compartir</div> 
+            </div>
+        </div>
+        
+    <% }) %>
+<% } %>
+</div>

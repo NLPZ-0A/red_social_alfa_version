@@ -1,0 +1,180 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+html.body{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+
+.config-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.config-container > .config-bar{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    height: 100vh;
+    width: 35vw;
+    background-color: #2a2b38;
+    color : #838285;
+}
+
+ .buttons-config{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%;
+    margin: 40px;
+ }
+
+ .button-config{
+    padding: 10px;
+    width: 100%;
+    border-radius: 3px;
+    margin: 4px;
+    transition: all 0.3s;
+ }
+
+ .button-config.my-account{
+    background-color: #404258;
+ }
+
+ .button-config:hover{
+    background-color: #333446;
+ }
+ 
+ .button-config:focus{
+    background-color: #404258;
+ }
+
+ .button-config a{
+    text-decoration: none;
+    color: #dedde2;
+    font-weight: 400;
+ }
+
+.config-container > .config-bar p{
+    font-weight: 600;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.config-container > .config-forms{
+    height: 100vh;
+    width: 100%;
+    background-color:#1c1c25;
+}
+
+
+.profile-form-container{
+    background-color: #15181f;
+    max-width: 900px;
+    border-radius: 12px;
+    box-shadow: 0px 20px 25px -10px rgb(0, 0, 0, 0.5);
+    margin: 30px;
+}
+
+.profile-form{
+    padding-top: 40px;
+}
+.profile-form > .title-form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    color: #424242;
+}
+
+ .inputs-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    color: #838285;
+    font-size: 14px;
+    font-weight:500;
+}
+
+.input-submit{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 30px;
+}
+
+.input-submit input{
+   background-color: rgb(95, 128, 235);
+   box-shadow: 0 2px 3px 2px rgb(0, 0, 0, 0.2);
+   outline: none;
+   border: none;
+   border-radius: 4px;
+   color: white;
+   padding: 8px;
+   width: 200px;
+   transition:  all 0.3s;
+}
+
+.input-submit input:hover{
+    background-color: rgb(78, 102, 180);
+}
+.input-submit input:focus{
+    background-color: rgb(50, 66, 119);
+    box-shadow: 0 2px 3px 2px rgb(0, 0, 0, 0);
+}
+
+.field{
+    margin-bottom: 20px;
+    width: 300px;
+}
+
+.field.text{
+    padding: 7px;
+    border-radius: 3px; 
+    background-color: #15181f;
+    color: rgb(224, 224, 224);
+    outline: none;
+    border : solid rgb(94, 94, 94) 1px;
+
+}
+
+.field.date{
+    padding: 7px;
+    border-radius: 3px; 
+    background-color: #15181f;
+    color: rgb(224, 224, 224);
+    outline: none;
+    border : solid rgb(94, 94, 94) 1px;
+}
+
+.field.textarea{
+    resize: none;
+    border-radius: 3px;
+    height: 120px;
+    background-color: #15181f;
+    color: rgb(224, 224, 224);
+    outline: none;
+    border : solid rgb(94, 94, 94) 1px;
+}
+
+.first-section{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    
+}
+
+.second-section{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include('partials/head') %>
+
+
+<body>
+  <div class="centerLoader active" id="onload">
+    <div class="loadingio-spinner-eclipse-y8u15f3ar1i">
+        <div class="ldio-zzugt4gcsy">
+            <div></div>
+        </div>
+    </div>
+</div>
+
+  <div class="section">
+    <div class="container">
+      <div class="row full-height justify-content-center">
+        <div class="col-12 text-center align-self-center py-5">
+          <div class="section pb-5 pt-5 pt-sm-2 text-center">
+            <h6 class="mb-0 pb-3">
+              <span>Log In </span>
+              <span>Sign Up</span>
+            </h6>
+            <input class="checkbox" type="checkbox" id="reg-log" name="reg-log"/>
+            <label for="reg-log"></label>
+
+            <div class="card-3d-wrap mx-auto">
+              <div class="card-3d-wrapper">
+                <div class="card-front">
+                  <div class="center-wrap">
+                    <div class="section text-center">
+                      <h4 class="mb-4 pb-3">Log In</h4>
+                      <div class="form-group">
+                        <input type="email" name="logemail" class="form-style" placeholder="Tu correo..." id="logemail" autocomplete="off">
+                        <i class="input-icon uil uil-at"></i>
+                      </div>  
+                      <div class="form-group mt-2">
+                        <input type="password" name="logpass" class="form-style" placeholder="Tu contraseña..." id="logpass" autocomplete="off">
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                       <input type="hidden" name="csrf" class="token" value=csrf >
+                      <a href="#" class="btn mt-4">Enviar</a>
+                        <p class="mb-0 mt-4 text-center">
+                          <a href="#0" class="link">Recuerdas tu contraseña?</a>
+                        </p>
+                    </div>
+                    
+                    <p class="warnings login" id="warningsLogin" style="color: rgb(250, 62, 62);"> error </p>
+
+                    <% if(locals.message) { %>
+                      <p><%= locals.message %></p>
+                    <% } %>
+                  </div>
+                </div>
+
+                <div class="card-back">
+                  <div class="center-wrap">
+                    <div class="section text-center">
+                      <h4 class="mb-4 pb-3">Sign Up</h4>
+                      <div class="form-group">
+                        <input type="text" name="logname" minlength="6" maxlength="30" class="form-style logname" placeholder="Tu nombre completo" id="regname" autocomplete="off">
+                        <i class="input-icon uil uil-user"></i>
+                      </div> 
+                      <div class="form-group mt-2">
+                        <input type="text" name="logname"  minlength="6" maxlength="30" class="form-style logname username" placeholder="Tu nombre de usuario completo" id="regusername" autocomplete="off">
+                        <i class="input-icon uil uil-user"></i>
+                      </div>  
+                      <div class="form-group mt-2">
+                        <input type="email" name="logemail"  minlength="12" maxlength="64" class="form-style logemail" placeholder="Tu correo" id="regemail" autocomplete="off">
+                        <i class="input-icon uil uil-at"></i>
+                      </div>  
+                      
+                      <div class="form-group mt-2">
+                        <input type="password" name="logpass" minlength="8" maxlength="64" class="form-style logpass" placeholder="Tu contraseña" id="regpass" autocomplete="off">
+                        <i class="input-icon uil uil-lock-alt"></i>
+                      </div>
+                      <a  class="btn submit mt-4">Enviar</a>
+                    </div>
+
+                    <p class="warnings register" id="warningsRegister" style="color: rgb(250, 62, 62);"> error </p>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+           <%if(typeof error == "undefined"){%>
+                 
+              <% } else { %>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong><%= error %></strong>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+
+              <%= error.message%> 
+                <%}%>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/js/load.js"></script>
+  <script src="/js/validaciones.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

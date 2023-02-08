@@ -1,0 +1,71 @@
+
+    <nav class="navbar">
+        <img src="/img/logo.png" class="logo" alt="#">
+
+        <div class="search-container">
+            <input type="text" class="input-search" placeholder="ingrese el nombre de usuario...">
+            <button class="button-search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+        
+        <ul>
+            <li><a href="/home"><i class='bx bx-home nav-icon' ></i></a></li>
+            <li><a href="#"><i class='bx bx-message-rounded-dots nav-icon' ></i></a></li>
+            <li><a href="/logout"><i class='bx bx-exit nav-icon' ></i></a></li>
+        </ul>
+        <img src="/img/user.png" class="user-pic" alt="#" onclick="toggleMenu()">
+
+        <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+                <a style="text-decoration: none;" href="/profile/<%= currentUser.username%>" class="link-color-user">
+                    <div class="user-info">
+                        <img src="/img/user.png" >
+                        <h2><%= currentUser.username %></h2>
+                    </div>
+                </a>
+
+                <hr>
+
+                <a href="#" class="sub-menu-link">
+                    <i class='bx bxs-user-circle' ></i>
+                    <p>Editar perfil</p>
+                    <span>></span>
+                </a>
+
+                <a href="#" class="sub-menu-link">
+                    <i class='bx bxs-cog' ></i>
+                    <p>Configuracion </p>
+                    <span>></span>
+                </a>
+
+                <a href="#" class="sub-menu-link">
+                    <i class='bx bxs-help-circle' ></i>
+                    <p>Ayuda y politicas</p>
+                    <span>></span>
+                </a>
+
+                <a href="#" class="sub-menu-link">
+                    <i class='bx bxs-door-open' ></i> <p>Salir</p>
+                  
+                    <span>></span>
+                </a>
+                
+            </div>
+
+        </div>
+
+    </nav>
+
+
+<script defer>
+
+    let subMenu = document.getElementById("subMenu");
+
+    function toggleMenu(){
+        subMenu.classList.toggle("open-menu");
+
+    }
+
+
+</script>
