@@ -2,71 +2,278 @@
 <% if(posts){ %>
     <% posts.forEach( function(post){ %>
 
-        <div class="post-container" id="post-div<%= post.id %>" name="<%= post.id %>">
+        <% if(!post.category_post) {%>
+            <div class="post-container" id="post-div<%= post.id %>" name="<%= post.id %>">
 
-        <div class="user-profile">
-            <% if (post.profile_image_user == 'null') {%>
-                <a href="/profile/<%= post.username %>"> <img src="<%= post.profile_image_user%>" alt="img-avatar"> </a>
-            <% } else{%>
-                <a href="/profile/<%= post.username %>"> <img src="/img/user.png" > </a>
-            <% } %>
+            <div class="user-profile">
+                <% if (post.profile_image_user) {%>
+                    <a href="/profile/<%= post.username %>"> <img src="/files/<%= post.profile_image_user%>" alt="img-avatar"> </a>
+                <% } else{%>
+                    <a href="/profile/<%= post.username %>"> <img src="/img/user.png" > </a>
+                <% } %>
 
-            <div class="date-pub">
-                <p><a href="/profile/<%= post.username %>"><%= post.name %></a></p>
-                <span><%=post.date%></span>
-            </div>
-
-            <% if (currentUser.username === post.username) {%>
-                <div class="edit-post" data-submenu-id="<%= post.id %>">
-                    <a class="edit-icon" id ="<%= post.id %>"><i class="far fa-edit"></i></a>
+                <div class="date-pub">
+                    <p><a href="/profile/<%= post.username %>"><%= post.name %></a></p>
+                    <span><%=post.date%></span>
                 </div>
 
-                <div class="post-menu-wrap" data-value-edit="<%= post.id %>">
-                    <div class="post-menu-button edit" data-edit-id="<%= post.id %>">
-                        <a> Editar post </a>
+                <% if (currentUser.username === post.username) {%>
+                    <div class="edit-post" data-submenu-id="<%= post.id %>">
+                        <a class="edit-icon" id ="<%= post.id %>"><i class="far fa-edit"></i></a>
                     </div>
-                    <hr>
-                    <div class="post-menu-button delete" data-delete-id="<%= post.id %>">
-                        <a> Eliminar post </a> 
+
+                    <div class="post-menu-wrap" data-value-edit="<%= post.id %>">
+                        <div class="post-menu-button edit" data-edit-id="<%= post.id %>">
+                            <a> Editar post </a>
+                        </div>
+                        <hr>
+                        <div class="post-menu-button delete" data-delete-id="<%= post.id %>">
+                            <a> Eliminar post </a> 
+                        </div>
+                        <hr>
+                        <div class="post-menu-button close" id="close-window" data-close-id="<%= post.id %>">
+                            <a > Cerrar </a>
+                        </div>
                     </div>
-                    <hr>
-                     <div class="post-menu-button close" id="close-window" data-close-id="<%= post.id %>">
-                        <a > Cerrar </a>
-                    </div>
+                <% } %>
+                    
+            </div>
+            
+            <p class="post-text _<%= post.id%>"><%= post.content %></p>
+
+            <% if(post.file !== '' && post.file.match(/\.(jpg|jpeg|png)$/)) {%>
+                <div  class="post-image">
+                    <img src="<%= post.file %>" class="postImage _<%=post.id %>"> 
                 </div>
             <% } %>
-                
-        </div>
-        
-        <p class="post-text"><%= post.content %></p>
 
-        <% if(post.image !== '') {%>
-            <div  class="post-image">
-                <img src="<%= post.image %>">
-            </div>
-        <% } %>
+            <% if(post.file !== '' && post.file.match(/\.(avi|mp4|mpeg|webm)$/)) {%>
+                <div  class="post-image">
 
 
-        <hr>
-            <div class="add-post-buttons"> 
-                <% if(!post.iLikePost) { %>   
-                    <div class="post-ico button-like like" id="<%= post.id %>" value="like" data-value="<%= post.id %>">
-                        <i class="fa-regular fa-thumbs-up"></i> Like <%= post.likesCount%>
+    
+                        <video style="width: 100%;"
+                          id="my-video"
+                          class="video-js"
+                          controls
+                          preload="auto"
+                         
+                          data-setup="{}"
+                        >
+                          <source src="<%= post.file %>" type="video/mp4"/>
+                        
+                          
+                        </video>
+
+
+                    <!--<video src="<%= post.file %>" width="640" height="480" autoplay muted loop></video>-->
+                    
+                </div>
+            <% } %>
+
+
+            <hr>
+                <div class="add-post-buttons"> 
+                    <% if(!post.iLikePost) { %>   
+                        <div class="post-ico button-like like" id="<%= post.id %>" value="like" data-value="<%= post.id %>">
+                            <i class="fa-regular fa-thumbs-up"></i> Like <%= post.likesCount%>
+                        </div> 
+                    <% }else { %>
+                        <div class="post-ico button-like unlike" id="<%= post.id %>" value="unlike" data-value="<%= post.id %>">
+                            <i class="fa-regular fa-thumbs-down"></i> like <%= post.likesCount %>
+                        </div>
+                    <% } %>
+
+                    <div class="post-ico comments" id="<%= post.id %>">
+                        <i class="far fa-comment"></i></i> Comments 
                     </div> 
-                <% }else { %>
-                    <div class="post-ico button-like unlike" id="<%= post.id %>" value="unlike" data-value="<%= post.id %>">
-                        <i class="fa-regular fa-thumbs-down"></i> like <%= post.likesCount %>
+
+                    <div class="post-ico compartir" id="<%= post.id %>">
+                        <i class="fa-solid fa-share"></i> compartir
+                    </div> 
+                </div>
+            <hr>
+
+                <div class="box-comment _<%= post.id %>">
+                    <div class="input-comment">
+                        <div class="input-text">
+                            <input type="text"  placeholder="Escribe un comentario..." class="comments-input<%=post.id%>">
+                        </div>
+                    
+                        <div class="icons">
+                            <div class="icons-media">
+                                <div class="icon gif">
+                                    <i class='bx bxs-file-gif' ></i>
+                                </div>
+
+                                <div class="icon pic">
+                                    <i class='bx bxs-camera'></i>
+                                </div>
+
+                                <div class="icon video">
+                                    <i class='bx bxs-videos' ></i>
+                                </div>
+                            </div>
+
+                            <div class="icons-comments">
+                                <div class="icon send" id="send">
+                                    <i class='bx bxs-send' id="<%= post.id %>"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/post/<%= post.id%>" class="open-modal-comment">Ver comentarios...</a>
+                </div>
+            </div>
+        <% } else{ %>
+            <div class="post-container reply" id="post-div<%= post.id %>" name="<%= post.id %>">
+
+                <div class="user-profile reply">
+                    <% if (post.profile_image_user) {%>
+                        <a href="/profile/<%= post.username %>"> <img src="/files/<%= post.profile_image_user%>" alt="img-avatar"> </a>
+                    <% } else{%>
+                        <a href="/profile/<%= post.username %>"> <img src="/img/user.png" > </a>
+                    <% } %>
+
+                        
+                    <div class="date-pub">
+                        <p><a href="/profile/<%= post.username %>"><%= post.name %></a></p>
+                        <span><%=post.date%></span>
+                    </div>
+    
+                    <% if (currentUser.username === post.username) {%>
+                        <div class="edit-post" data-submenu-id="<%= post.id %>">
+                            <a class="edit-icon" id ="<%= post.id %>"><i class="far fa-edit"></i></a>
+                        </div>
+    
+                        <div class="post-menu-wrap" data-value-edit="<%= post.id %>">
+                            <div class="post-menu-button edit" data-edit-id="<%= post.id %>">
+                                <a> Editar post </a>
+                            </div>
+                            <hr>
+                            <div class="post-menu-button delete" data-delete-id="<%= post.id %>">
+                                <a> Eliminar post </a> 
+                            </div>
+                            <hr>
+                            <div class="post-menu-button close" id="close-window" data-close-id="<%= post.id %>">
+                                <a > Cerrar </a>
+                            </div>
+                        </div>
+                    <% } %>
+                        
+                </div>
+
+                <p class="post-text _<%= post.id%>"><%= post.original_content %></p>
+
+                <div class="reply-text">
+                    <em><%= post.name %>:<p>Ha compartido este post!</p></em>
+                </div>
+
+
+            <div class="mark-reply" id="<%= post.to_id_post %>">
+
+                <div class="user-profile reply">
+                    <% if (post.profile_image_created_by) {%>
+                        <a href="/profile/<%= post.created_by_username %>"> <img src="/files/<%= post.profile_image_created_by%>" alt="img-avatar"> </a>
+                    <% } else{%>
+                        <a href="/profile/<%= post.username %>"> <img src="/img/user.png" > </a>
+                    <% } %>
+
+                        
+                    <div class="date-pub">
+                        <p><a href="/profile/<%= post.created_by_username %>"><%= post.created_by_name %></a></p>
+                        <span><%= post.date_reply %></span>
+                    </div>
+                </div>
+
+                <p class="post-text _<%= post.id%>"><%= post.content %></p>
+    
+                <% if(post.file !== '' && post.file.match(/\.(jpg|jpeg|png)$/)) {%>
+                    <div  class="post-image">
+                        <img src="<%= post.file %>" class="postImage _<%=post.id %>"> 
+                    </div>
+                <% } %>
+    
+                <% if(post.file !== '' && post.file.match(/\.(avi|mp4|mpeg|webm)$/)) {%>
+                    <div  class="post-image">
+    
+    
+        
+                            <video style="width: 100%;"
+                              id="my-video"
+                              class="video-js"
+                              controls
+                              preload="auto"
+                             
+                              data-setup="{}"
+                            >
+                              <source src="<%= post.file %>" type="video/mp4"/>
+                            
+                              
+                            </video>
+    
+    
+                        <!--<video src="<%= post.file %>" width="640" height="480" autoplay muted loop></video>-->
+                        
                     </div>
                 <% } %>
 
-                <div class="post-ico comments">
-                    <i class="far fa-comment"></i></i> Comments 
-                </div> 
-
-                <div class="post-ico compartir"><i class="fa-solid fa-share"></i> compartir</div> 
+                        
             </div>
-        </div>
-        
+    
+               
+                    <div class="add-post-buttons"> 
+                        <% if(!post.iLikePost) { %>   
+                            <div class="post-ico button-like like" id="<%= post.id %>" value="like" data-value="<%= post.id %>">
+                                <i class="fa-regular fa-thumbs-up"></i> Like <%= post.likesCount%>
+                            </div> 
+                        <% }else { %>
+                            <div class="post-ico button-like unlike" id="<%= post.id %>" value="unlike" data-value="<%= post.id %>">
+                                <i class="fa-regular fa-thumbs-down"></i> like <%= post.likesCount %>
+                            </div>
+                        <% } %>
+    
+                        <div class="post-ico comments" id="<%= post.id %>">
+                            <i class="far fa-comment"></i></i> Comments 
+                        </div> 
+                    </div>
+                <hr>
+    
+                    <div class="box-comment _<%= post.id %>">
+                        <div class="input-comment">
+                            <div class="input-text">
+                                <input type="text"  placeholder="Escribe un comentario..." class="comments-input<%=post.id%>">
+                            </div>
+                        
+                            <div class="icons">
+                                <div class="icons-media">
+                                    <div class="icon gif">
+                                        <i class='bx bxs-file-gif' ></i>
+                                    </div>
+    
+                                    <div class="icon pic">
+                                        <i class='bx bxs-camera'></i>
+                                    </div>
+    
+                                    <div class="icon video">
+                                        <i class='bx bxs-videos' ></i>
+                                    </div>
+                                </div>
+    
+                                <div class="icons-comments">
+                                    <div class="icon send" id="send">
+                                        <i class='bx bxs-send' id="<%= post.id %>"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/post/<%= post.id%>" class="open-modal-comment">Ver comentarios...</a>
+                    </div>
+                </div>
+            
+        <% } %>
+
     <% }) %>
 <% } %>
 </div>
+

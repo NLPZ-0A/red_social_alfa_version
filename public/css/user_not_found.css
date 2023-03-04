@@ -1,0 +1,54 @@
+body{
+    width: 100%;
+}
+
+section{
+    display: flex;
+    justify-content: center;
+}
+.content-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 70px;
+    width: 70%;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.warning-text{
+    text-align: center;
+    font-size: 16px;
+    padding-top: 10px;
+    color:rgb(19, 19, 19) ;
+}
+
+.profile-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px rgb(184, 181, 181);
+}
+
+.icon-user{
+    text-align: center;
+    font-size:10rem;
+    color: rgb(148, 146, 146);
+}
+
+.profile-image img{
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+}
+
+.username p{
+    font-size: 25px;
+    font-weight: 500;
+    color: rgb(24, 24, 24);
+}
+
+.username a{
+    text-decoration: none;
+   
+}

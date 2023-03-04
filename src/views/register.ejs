@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf" content="<%= csrfToken %>">
+    <title>Register</title>
+
+    <!--estilos-->
+    <link href="/css/loader.css" rel="stylesheet">
+
+    <!--bootstrap-->
+    <link href="/css/style_register.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+              <div class="card rounded-3 text-black card-container">
+                <div class="row g-0" id="container-flex">
+                  <div class="col-lg-6">
+                    <div class="card-body p-md-5 mx-md-4">
+      
+                      <div class="text-center">
+                        <img src="/img/mascotlogo.png"
+                          style="width: 150px;" alt="logo">
+                        <h4 class="mt-1 mb-4 pb-1">Somos el Camaleon Team</h4>
+                      </div>
+      
+                      <form>
+                        <p>Registresé para poder usar la aplicación</p>
+      
+                        <div class="form-outline mb-4">
+                          <input type="text" id="name" class="form-control"
+                            placeholder="Ingrese su nombre..." name="name" required/>
+                        </div>
+      
+                        <div class="form-outline mb-4">
+                          <input type="text" id="username" class="form-control" 
+                            placeholder="Ingrese su username..." name="username" required/>
+                        </div>
+
+                        <div class="form-outline mb-4">
+                            <input type="email" id="email" class="form-control"
+                              placeholder="Ingrese su email..." name="email" required/>
+                          </div>
+        
+                          <div class="form-outline mb-4">
+                            <input type="password" id="password" class="form-control" 
+                              placeholder="Ingrese su contraseña..." name="password" required/>
+                          </div>
+      
+                        <div  class="text-center pt-1 mb-5 pb-1">
+                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 sendRegister" type="button" style="background-color: rgb(24, 24, 24); border: none !important;">Registrarse</button>
+                        </div>
+
+                        <div class="text-center">
+                          <p class="errorMessage" style="color: rgb(255, 47, 47);"></p>
+                        </div>
+      
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                          <p class="mb-0 me-2">Ya tenes una cuenta?</p>
+                          <a href="/login" type="button" class="btn btn-outline-danger">Iniciar sesion</a>
+                        </div>
+      
+                      </form>
+                      
+                    </div>
+                  </div>
+
+                  <div class="col-lg-6 d-flex align-items-center gradient-custom-2 " id="particles-js" style="background-color: rgb(221, 220, 220);">
+                    <!--<div class="text-white px-3 py-4 p-md-5 mx-md-4 textblock" >
+                        <h4 class="mb-4 titleBox">Bienvenido a la camaleon network</h4>
+                        <p class="small mb-0 paragraph">En esta red, la privacidad del usuario es de suma importancia. No recopilamos ni almacenamos datos innecesarios y permitimos que el usuario realice posteos sin restricciones ideológicas u otras. Además, garantizamos que todas las conversaciones entre usuarios son completamente privadas, cifradas de extremo a extremo y seguras.
+
+                            Nuestra filosofía se centra en proteger la privacidad del usuario en todo momento y ofrecer una experiencia en la que puedan expresarse libremente sin temor a censuras.</p>
+                      </div>-->
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+
+    <div class="centerLoader active" id="onload">
+        <div class="loadingio-spinner-eclipse-y8u15f3ar1i">
+            <div class="ldio-zzugt4gcsy">
+                <div></div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--jquery-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+      <!--bootstrap-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+      <script src="/js/load.js"></script>
+      <script src="/js/register.js"></script>
+      <script src="/particle/particles.min.js"></script>
+      <script src="/particle/config.js"></script>
+</body>
+
+
+</html>

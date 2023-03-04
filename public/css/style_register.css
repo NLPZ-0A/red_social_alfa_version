@@ -1,0 +1,49 @@
+body{
+    max-height: 100vh ;
+    height: 100% !important;
+    margin: 0;
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #04050f;
+    max-height: 100vh !important;
+    width: 100%;
+    margin: 0;
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: #04050f;
+    
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #04050f;
+    }
+    
+    @media (min-width: 768px) {
+    .gradient-form {
+    height: 100vh !important;
+    }
+    }
+    @media (min-width: 769px) {
+    .gradient-custom-2 {
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+    }
+    }
+
+.card-container{
+    max-height: 100vh;
+    margin: 0;
+}
+
+.textblock{
+    display: block;
+    position: absolute;
+    color :#1d1d1d
+}
+
+#container-flex{
+    flex-direction: row-reverse;
+}
+
+.textblock h4, .paragraph{
+    color:rgb(27, 27, 27) ;
+}

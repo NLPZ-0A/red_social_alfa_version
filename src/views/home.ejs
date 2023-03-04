@@ -4,15 +4,14 @@
     <%- include('./partials/head_no_bp'); %>
     <link rel="stylesheet" href="./css/style-modal.css">
     <link rel="stylesheet" href="./css/loader.css">
+    <link href="https://vjs.zencdn.net/8.0.4/video-js.css" rel="stylesheet" />
 
     <!-- <script src="/js/openPopup.js" defer></script> -->
-    
     
 </head>
 <body>
     
     <%- include('./partials/navbar'); %>
-
 
     <div class="centerLoader active" id="onload">
         <div class="loadingio-spinner-eclipse-y8u15f3ar1i">
@@ -28,90 +27,57 @@
         <div class="search-container">
             <input type="text" class="input-search" placeholder="ingrese el nombre de usuario...">
             <button class="button-search">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <i class='bx bx-search'></i>
             </button>
         </div>
 
+        <% if(friends){%>
+            <% friends.forEach((friend) => { %>
+                <div class="friend">
+                    <% if (friend.image) {%>
+                        <a href="/profile/<%= friend.username %>"> <img src="./files/<%= friend.image %>" alt="img-avatar"> </a>
+                    <% } else{%>
+                        <a href="/profile/<%= friend.username %>"> <img src="./img/user.png" > </a>
+                    <% } %>
 
-        <div class="friend">
-            <% if (user.image == 'null') {%>
-                <a href="/profile/<%= user.username %>"> <img src="<%= user.image %>" alt="img-avatar"> </a>
-            <% } else{%>
-                <a href="/profile/<%= user.username %>"> <img src="./img/user.png" > </a>
-            <% } %>
+                    <div>
+                        <p><a href="/profile/<%= friend.username %>"><%= friend.name %></a></p>
+                    </div>
 
+                    <div class="connect">
+                        
+                    </div>
+
+                </div>
+                <hr>
+           <% }); %>
+        <% } %>
+    </div>
+
+    <div class="box-notify">
+        <p>Mis notificaciones</p>
+
+        <div class="notify-title">
             <div>
-                <p><a href="/profile">Jhon conway</a></p>
+                <p>Notificaciones</p>
             </div>
-
-            <div class="connect">
-                
-            </div>
-
         </div>
         <hr>
-        <div class="friend">
-            <% if (user.image == 'null') {%>
-                <a href="/profile/<%= user.username %>"> <img src="<%= user.image %>" alt="img-avatar"> </a>
-            <% } else{%>
-                <a href="/profile/<%= user.username %>"> <img src="./img/user.png" > </a>
-            <% } %>
 
-            <div>
-                <p><a href="/profile">Jhon conway</a></p>
-            </div>
-            
-            <div class="connect">
-                
-            </div>
-        </div>
-        <hr>
-        <div class="friend">
-            <% if (user.image == 'null') {%>
-                <a href="/profile/<%= user.username %>"> <img src="<%= user.image %>" alt="img-avatar"> </a>
-            <% } else{%>
-                <a href="/profile/<%= user.username %>"> <img src="./img/user.png" > </a>
-            <% } %>
 
-            <div>
-                <p><a href="/profile">Jhon conway</a></p>
-            </div>
-
-            <div class="connect">
-                
-            </div>
-
-        </div>
-        <hr>
-        <div class="friend">
-            <% if (user.image == 'null') {%>
-                <a href="/profile/<%= user.username %>"> <img src="<%= user.image %>" alt="img-avatar"> </a>
-            <% } else{%>
-                <a href="/profile/<%= user.username %>"> <img src="./img/user.png" > </a>
-            <% } %>
-
-            <div>
-                <p><a href="/profile">Jhon conway</a></p>
-            </div>
-            <div class="connect">
-
-            </div>
-
-        </div>
-        <hr>
     </div>
 
     <div class="write-post-container">
 
         <div class="user-profile">
-            <% if (user.image == 'null') {%>
-                <a href="/profile/<%= user.username %>"> <img src="<%= user.image %>" alt="img-avatar"> </a>
+            <% if (user.image) {%>
+                <a href="/profile/<%= user.username %>"> <img src="./files/<%= user.image %>" alt="img-avatar"> </a>
             <% } else{%>
                 <a href="/profile/<%= user.username %>"> <img src="./img/user.png" > </a>
             <% } %>
 
             <div>
-                <p><a href="/profile"><%= user.name %></a></p>
+                <p><a href="/profile/<%= user.username%>"><%= user.name %></a></p>
                 <small>Public <i class="fa-sharp fa-solid fa-caret-down"></i></small>
             </div>
         </div>
@@ -130,7 +96,7 @@
 
     </div>
 
-    <div class="overlay">
+    <div class="overlay add">
         <div class="popup">
             <div id="cerrar-popup-container">
                 <a id="btn-cerrar-popup" class="btn-cerrar-popup">
@@ -149,7 +115,7 @@
                                 <input name="image" type="file" class="upload-hide" id="upload-custom">
                                 <label for="upload-custom" class="upload-label">
                                     <i class="uil uil-export"></i>
-                                    <p class="dragText">Drag & Drop to upload file</p>
+                                    <p class="dragText">Sube una imágen o video.</p>
                                     <img id="imagenPrevisualizacion" class="image-prev">
                                     
                                     <!--<input name="image" type="file" class="uploadHide" id="uploadCustom"> -->
@@ -157,11 +123,34 @@
                     </div>
                 </div>
 
-                    <input type="submit" class="btn-submit" value="enviar">
+                    <input type="submit" class="btn-submit " value="enviar">
             </form>
 
             
         </div>
+    </div>
+
+    <div class="overlay replyPost">
+        <div class="popup reply">
+            <div id="cerrar-popup-container">
+                <a id="btn-cerrar-popup" class="btn-cerrar-popup">
+                    <i class="fa-solid fa-x"></i>
+                </a>
+            </div>
+    
+            <h4>Agregué un comentario</h4>
+            <form  enctype="multipart/form-data" class="form-post reply">
+
+                <div class="contenedor-inputs">
+
+                    <input name="content" type="text" class="postReplyInput" placeholder="Texto del post...">
+            
+                </div>
+
+                    <input type="submit" class="btnReply" value="enviar">
+            </form>
+        </div>
+
     </div>
 
    
@@ -185,6 +174,8 @@
     </script>
 
     <script src="/js/load.js"></script>
+    <script src="/js/notifications.js"></script>
+    <script src="https://vjs.zencdn.net/8.0.4/video.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

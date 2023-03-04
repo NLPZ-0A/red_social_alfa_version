@@ -1,10 +1,8 @@
 const jwt = require('jsonwebtoken');
 const {promisify} = require('util');
-const db=require('../database/db_local');
-const DB=require('../database/dbmodel');
+const UserInstance = require('../models/User');
 
-
-const DBmodel=new DB(db);
+const User = new UserInstance();
 
 module.exports.isLoggedIn = async (req, res, next) =>{
   
@@ -16,15 +14,17 @@ module.exports.isLoggedIn = async (req, res, next) =>{
         const token_parseado= JSON.parse(JSON.stringify(decoded));
 
         //verificar si existe el usuario con el mismo id
-        let usuario = await DBmodel.getUserbyId(token_parseado.id);
+        let usuario = await User.getUserbyId(token_parseado.id);
 
     
 
-        if(usuario.length < 1) return await next();
+        if(usuario.length === 0) return res.redirect('/login');
 
         req.usuario = await usuario[0];
+        console.log('islogged');
+   
 
-        return await next();
+        return next();
 
     }else{
 

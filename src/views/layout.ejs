@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf" content="<%= csrfToken %>">
+
+
+    <!--------------------------------------------------BOXICONS--------------------------------------------------------------->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+    <!-------------------------------------------------JQUERY------------------------------------------------------------------->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!--------------------------------------------------FONTS--------------------------------------------------------------->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!--------------------------------------------------STYLE----------------------------------------------------->
+    <link rel="stylesheet" href="/css/style-config.css">
+    <link rel="stylesheet" href="/css/loader.css">
+
+    <title><%= title %></title>
+</head>
+<body>
+    <section class="config-container">
+        
+        <div class="config-bar">
+            <a href="/profile/<%= user.username %>" class="arrow-back" style="text-decoration: none;">
+                
+                <i class='bx bx-arrow-back'></i>
+            
+        </a>
+            <div class="buttons-config">
+                <div class="title">
+                    <p>Configuración del usuario</p>
+                </div>
+                 <div class="button-config my-account">
+                    <a href="/config/myAccount">Mi cuenta </a>
+                </div>
+                 <div class="button-config  edit-profile">
+                    <a href="/config/editprofile">Editar perfil</a>
+                </div>
+                 <div class="button-config privacy">
+                    <a href="">Privacidad y seguridad</a>
+                </div>
+                 <div class="button-config close-session">
+                    <a href="/logout">Cerrar sesion</a>
+                </div>
+            </div>
+        </div>
+
+        <%-  body  %>
+        <!--<div class="config-forms">
+            <div class="profile-form-container">
+                <form class="profile-form" >
+
+                    <h3 class="title-form">Informacion del perfil</h3>
+
+                    <div class="inputs-container">
+
+                        <div class="first-section">
+                            <label for="name"> Nombre</label>
+                            <input type="text" name="name" placeholder="nombre de usuario..." class="field text">
+
+                            <label for="phone"> Telefono </label>
+                            <input type="text" name="phone" placeholder="numero de telefono..." class="field text">
+
+                            <label for="job"> Empleo </label>
+                            <input type="text" name="job" placeholder=" trabaja en..." class="field text">
+
+                            <label for="positionJob"> Cual es su cargo</label>
+                            <input type="text" name="positionJob" placeholder="cargo en su empleo..." class="field text">
+
+                        </div>
+
+                        <div class="second-section">
+                            <label for="location">Ubicacion actual</label>
+                            <input type="text" name="location" placeholder="lugar de residencia..." class="field text">
+
+                            <label for="birthday"> Fecha de nacimiento</label>
+                            <input type="date" name="birthday"  class="field date">
+
+                            <label for="description"> Descripcion</label>
+                            <textarea name="description" placeholder="Describete brevemente..."  class="field textarea" ></textarea>
+                        </div>
+                    </div>
+                    <div class="input-submit">
+                        <input type="submit" class="send-button" value="enviar" >
+                    </div>
+                </form>
+            </div>
+        </div>-->
+
+    </section>
+
+    <div class="centerLoader active" id="onload">
+        <div class="loadingio-spinner-eclipse-y8u15f3ar1i">
+            <div class="ldio-zzugt4gcsy">
+                <div></div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="/js/pageDetection.js" defer></script>
+    <script src="/js/config.js" defer></script>
+    <script src="/js/load.js" defer></script>
+</body>
+</html>

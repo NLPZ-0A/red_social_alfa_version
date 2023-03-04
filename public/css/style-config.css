@@ -2,14 +2,12 @@
     margin:0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
-    
 }
 
-html.body{
-    height: 100%;
-    width: 100%;
+body{
     margin: 0;
     padding: 0;
+    background-color:#1c1c25;   
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -23,11 +21,13 @@ html.body{
 }
 
 .config-container > .config-bar{
+    position: fixed;
+    overflow: auto;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
     height: 100vh;
-    width: 35vw;
+    width: 25vw;
     background-color: #2a2b38;
     color : #838285;
 }
@@ -36,7 +36,7 @@ html.body{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    height: 100%;
+    height: auto;
     margin: 40px;
  }
 
@@ -48,7 +48,7 @@ html.body{
     transition: all 0.3s;
  }
 
- .button-config.my-account{
+ .button-config.active{
     background-color: #404258;
  }
 
@@ -72,12 +72,9 @@ html.body{
     font-size: 14px;
 }
 
-.config-container > .config-forms{
-    height: 100vh;
-    width: 100%;
-    background-color:#1c1c25;
+.config-forms{
+    padding-left: 30vw;
 }
-
 
 .profile-form-container{
     background-color: #15181f;
@@ -178,3 +175,50 @@ html.body{
     flex-direction: column;
     margin: 20px;
 }
+
+.arrow-back {
+    display: flex;
+    text-decoration:  none;
+    color : #838285;
+    margin: 10px;
+    padding: 10px;
+    max-width: 50px;
+    max-height: 50px;
+    border: solid 2px;
+    border-radius: 100%;
+    border-color: #838285;
+    margin-right: 80%;
+    
+}
+
+.arrow-back > i{
+    font-size: 20px;
+    margin :0;
+    text-align: center;
+}
+
+.arrow-back:hover{
+    background-color: #1f232c;
+}
+
+
+/*.profile-form-container.socialNetworks{
+   
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color:#838285;
+}
+.socialNetworks form,.socialNetworks .inputs-containers{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.profile-form-container.socialNetworks .inputs-containers input{
+   width: 200%;   
+   
+}*/
+

@@ -1,14 +1,19 @@
 const User = require('../models/User');
 const Post = require('../models/post')
+const Comment = require('../models/Comments')
 const bcrypt = require('bcrypt')
 const { parseDate } = require('../tools/get_date_now');
 const auth_mail = require('../tools/auth_mail');
-const { getToken, getTokenData } = require('../config/jwt.config');
+const { getTokenData } = require('../config/jwt.config');
 const parseSQL = require('../tools/parseSQL');
 const jwt = require('jsonwebtoken');
+const moment = require('moment');
+const { json } = require('body-parser');
+moment.locale('es');
 
 const userInstance = new User();
 const postInstance = new Post();
+const commentInstance = new Comment();
 
 const register = async(req, res)=>{
 
@@ -24,7 +29,7 @@ const register = async(req, res)=>{
         auth_mail.sendConfirmation(data);
 
         const saveUser = await user.saveUser()
-        res.status(200);
+        return res.status(200).json({message : 'se ha registrado correctamente'});
 
     }catch(err){
         throw err;
@@ -41,7 +46,6 @@ const login = async(req, res) => {
             const { email, password } = req.body;
             const data = await userInstance.getUserbyEmail(email);
             const usuario = data[0];
-            console.log(usuario);
             const id = usuario.id;
 
 
@@ -60,8 +64,8 @@ const login = async(req, res) => {
                 return res.redirect('/home');
 
             }
-            res.statusMessage="contraseña incorrecta";
-            return res.status(403).end();
+          
+            return res.status(403).send({message :'contraseña incorrecta'});
         }
 
        return res.redirect('/home');
@@ -90,6 +94,8 @@ const home =  async (req, res)=>{
         const postsFilter = await postInstance.getFriendsPostFeed(req.usuario.id);
         const postsObject = parseSQL(postsFilter);
 
+        const friends = await userInstance.getFollowedsUsers(currentUser.id);
+
         const postsWithLikes = await Promise.all(postsObject.map(async post => {
             //const likes = await postsFilter.getLikes(currentUser.id);
             const likes = await postInstance.getLikeforPost(post.id);  
@@ -102,7 +108,61 @@ const home =  async (req, res)=>{
 
         const posts = parseDate(postsWithLikes);
         
-        res.render('home', {title:'blog', user : req.usuario, currentUser:currentUser , posts: posts });
+        res.render('home', {title:'blog', user : req.usuario, currentUser:currentUser , posts: posts, friends : friends, layout: false});
+    }catch(err){
+        throw err;
+        res.status(500).json({message: "error de servidor"});
+    }
+};
+
+const postView = async(req, res) =>{
+    try{
+        const currentUser = req.usuario;
+        const post_id = req.params.id;
+        const postReq = await postInstance.getPostById(post_id);
+        const commentReq = await commentInstance.getCommentsByPost(post_id);
+        
+        const commentObject = parseSQL(commentReq);
+        const postObject = parseSQL(postReq);
+
+        const friends = await userInstance.getFollowedsUsers(currentUser.id);
+
+        const likes = await postInstance.getLikeforPost(post_id);  
+        const likesReq = await postInstance.getLikes(post_id)
+
+        const likesCount = likesReq[0].likes;
+        const iLikePost = likes.some(like => like.user_id === currentUser.id);
+
+        const post= {
+            postBody : postObject,
+            likesCount : likesCount,
+            iLikePost : iLikePost,
+        }
+        
+        post.postBody[0].date = moment(post.postBody[0].created_at).local().fromNow();
+        post.postBody[0].likesCount = likesCount;
+        post.postBody[0].iLikePost = iLikePost;
+        //console.log(post.postBody[0]);
+
+        const commentsParsed = parseDate(commentObject);
+        const likesComments = await commentInstance.getAllLikesComments();  
+
+        const comments = await Promise.all(commentsParsed.map(async comment => {
+            let iLikeComment = false;
+            //const likes = await postsFilter.getLikes(currentUser.id);
+            const likesComments = await commentInstance.getLikesCommentById(comment.id);  
+            //const likesCommentReq = await commentInstance.getLikesCommentCount(comment.id);
+            //const likesCount = likesCommentReq.likes;
+            iLikeComment = likesComments.some(like => like.user_id === currentUser.id);
+
+            return { ...comment, iLikeComment};
+
+        }));
+
+        
+        //console.log(comments);
+        
+        res.render('postView' ,{title:'post', user : req.usuario, currentUser:currentUser , post: post.postBody[0], friends : friends, comments:comments, layout: false});
     }catch(err){
         throw err;
         res.status(500).json({message: "error de servidor"});
@@ -153,8 +213,29 @@ const ConfirmAccount = async (req, res) =>{
         }
 };
 
+const getCurrentUser = async(req, res) => {
+    try{
+        const userReq =  req.usuario;
+        const user =  req.usuario;
+        const dataUser = {
+            id : user.id,
+            name  : user.name,
+            username : user.username,
+            image : user.image
+        }
+        //const user = JSON.stringify(userReq);
+        
+        return res.status(200).send({user: dataUser});
+    }catch(err){
+        console.log(err);
+        return res.status(403).json({message : 'error al intentar encontrar el user'});
+    }
+};
+
 module.exports = {register,
                   login,
                   logout,
                   home,
-                  ConfirmAccount};
+                  postView,
+                  ConfirmAccount,
+                getCurrentUser};

@@ -1,4 +1,3 @@
-const express = require('express');
 const router = require('express').Router();
 const { ConfirmAccount } = require('../controller/userController');
 const cookies = require("cookie-parser")

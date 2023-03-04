@@ -1,14 +1,13 @@
-const db = require('../database/db_local');
-const DB = require('../database/dbmodel');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const UserInstance = require('../models/User');
 
-
+const User = new UserInstance();
 
 module.exports.login = async(req, res) => {
     
         const { email, password } = req.body
-        const data = await DBmodel.getUserbyEmail(email);
+        const data = await User.getUserbyEmail(email);
             
         console.log(`los datos son ${ JSON.stringify(data)} y la cantidad de objetos ${data.length}`);
 

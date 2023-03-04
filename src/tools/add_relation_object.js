@@ -1,7 +1,5 @@
-const db=require('../database/db_local');
-const Post_controller = require('../controller/post_controller');
-
-const post_controller = new Post_controller(db);
+const PostInstance = require('../models/post');
+const Post = new PostInstance();
 
 module.exports.addLikeProperty =  (posts_, user_id) => {
 
@@ -11,8 +9,8 @@ module.exports.addLikeProperty =  (posts_, user_id) => {
 
 
         for (let post of posts) {
-            let likePost = await post_controller.getLikeforPost(post.id);  
-            let iLikePost_ = await post_controller.isLikePost(user_id, post.id);
+            let likePost = await Post.getLikeforPost(post.id);  
+            let iLikePost_ = await Post.isLikePost(user_id, post.id);
             
             post.likesCount = likePost.length;
             post.iLikePost = iLikePost_.length > 0 ;

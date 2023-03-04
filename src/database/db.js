@@ -1,5 +1,5 @@
 //obtener el cliente
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 //crear la conexion a la base de datos
 const connection = mysql.createConnection({

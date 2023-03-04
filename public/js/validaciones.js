@@ -20,7 +20,7 @@ submit.addEventListener('click', e =>{
     const nameRegex = /^[a-zA-ZÀ-ÿ]+(?: [a-zA-ZÀ-ÿ]+){0,1}(?: [a-zA-ZÀ-ÿ]+){0,1}$/;
     const userRegex = /^[a-zA-Z0-9_]+[a-zA-Z0-9_-]{0,15}$/;
     const emailRegex =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const passRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/; 
+    const passRegex = ''
 
     let warnings = '';
     let submitMessage = false;
@@ -40,11 +40,7 @@ submit.addEventListener('click', e =>{
         warnings += `El email de registro no es valido <br>`;
         submitMessage = true;
     }
-    if(!validateString(passwordReg.value, passRegex)){
-        passwordReg.style = 'border: solid red';
-        warnings += `La contraseña de registro no es valida <br>`;
-        submitMessage = true;
-    }
+ 
 
     if(submitMessage){
         warningsRegister.innerHTML = warnings;

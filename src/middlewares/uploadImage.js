@@ -3,7 +3,8 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
-        cb(null, 'public/images')
+      
+        cb(null, 'public/files')
     },
     filename : function(req, file, cb){
         console.log(file.originalname);
@@ -14,7 +15,7 @@ const storage = multer.diskStorage({
 const upload = multer({
     storage: storage,
     fileFilter: function (req, file, cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|mp4|avi|gif)$/)) {
           return cb(new Error('Only image files are allowed!'), false);
         }
         cb(null, true);

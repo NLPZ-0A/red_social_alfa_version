@@ -1,6 +1,6 @@
 
     <nav class="navbar">
-        <img src="/img/logo.png" class="logo" alt="#">
+        <img src="/img/mascotlogo.png" class="logo" alt="#">
 
         <div class="search-container">
             <input type="text" class="input-search" placeholder="ingrese el nombre de usuario...">
@@ -11,19 +11,31 @@
         
         <ul>
             <li><a href="/home"><i class='bx bx-home nav-icon' ></i></a></li>
-            <li><a href="#"><i class='bx bx-message-rounded-dots nav-icon' ></i></a></li>
+            <li><a href="/chat"><i class='bx bx-message-rounded-dots nav-icon' ></i></a></li>
             <li><a href="/logout"><i class='bx bx-exit nav-icon' ></i></a></li>
         </ul>
-        <img src="/img/user.png" class="user-pic" alt="#" onclick="toggleMenu()">
+        <% if (currentUser.image) {%>
+             <img src="/files/<%= currentUser.image %>" alt="img-avatar" class="user-pic" onclick="toggleMenu()"> 
+        <% } else{%>
+             <img src="/img/user.png"  class="user-pic" alt="#" onclick="toggleMenu()" > 
+        <% } %>
+        
 
         <div class="sub-menu-wrap" id="subMenu">
             <div class="sub-menu">
-                <a style="text-decoration: none;" href="/profile/<%= currentUser.username%>" class="link-color-user">
-                    <div class="user-info">
-                        <img src="/img/user.png" >
-                        <h2><%= currentUser.username %></h2>
-                    </div>
-                </a>
+                
+                        <div class="user-info link-color-user" style="padding:4px; border-radius: 3px;">
+                            <% if (currentUser.image) {%>
+                                <a href="/profile/<%= currentUser.username %>"> <img src="/files/<%= currentUser.image %>" alt="img-avatar"> </a>
+                            <% } else{%>
+                                <a href="/profile/<%= currentUser.username %>"> <img src="/img/user.png" > </a>
+                            <% } %>
+                            <a style="text-decoration: none; color: #c0bfc6;" href="/profile/<%= currentUser.username%>" class="">
+                                <h2><%= currentUser.username %></h2>
+                            </a>
+                        </div>
+                    
+        
 
                 <hr>
 
@@ -33,7 +45,7 @@
                     <span>></span>
                 </a>
 
-                <a href="#" class="sub-menu-link">
+                <a href="/config" class="sub-menu-link">
                     <i class='bx bxs-cog' ></i>
                     <p>Configuracion </p>
                     <span>></span>

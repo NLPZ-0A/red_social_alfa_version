@@ -28,8 +28,7 @@ module.exports.validatorRegister = async (req, res, next)=>{
             console.log(req.body.nombre);
     
             console.log(message);
-            res.statusMessage=message;
-            return res.status(403).end();
+            return res.status(403).send({message : message});
         }else{
             next();
         }
@@ -52,7 +51,7 @@ module.exports.validatorLogin = async (req, res, next) => {
         
             //res.statusMessage = message;
             //res.locals.message = message;
-            return res.status(403).json({errorMessage : 'ha ocurrido un error'});
+            return res.status(403).send({message : message});
         }else{
             console.log('next');
             next();
@@ -80,7 +79,7 @@ const loginValidation = async (data) => {
             const user = await userInstance.getUserbyEmail(email);
 
             if(user.length === 0)
-                return 'Correo no  registrado';
+                return 'Usuario no registrado';
             }
 
             return true;
@@ -99,34 +98,32 @@ const formValidation = async (data) => {
             //console.log(name);
             //inputs vacios
             if(validator.isEmpty(String(name)) || validator.isEmpty(String(username)) || validator.isEmpty(String(email)) || validator.isEmpty(String(password))){
-                return 'Empty field not allowed';
+                return 'Ningún campo puede estar vacío';
             }
 
             //formato del email
             if(!validator.isEmail(email)){
-                return 'Email format is not valid';
+                return 'Formato de email inválido';
             }
 
             //formato de la contraseña
             if(!schema.validate(password)){
-                return 'invalid passsword';
+                return 'Formato de contraseña iválido';
             }
 
             //palabras prohibidas en la contraseña
             if(validator.contains(password.toLowerCase(), "password")){
-                return "invalid password";
+                return 'La contraseña no puede ser "password" o "contraseña" por razones de seguridad...';
             }
-
-
 
             //duplicacion
             let usuario = await userInstance.getUserbyUsername(username);
             let correo = await userInstance.getUserbyEmail(email);
 
             if(usuario.length > 0){
-                return 'username alredy exist';
+                return 'El usuario ya ha sido registrado';
             }else if(correo.length > 0){
-                return 'email alredy exist';
+                return 'El correo ya ha sido registrado';
             }
 
             //si todo esta bien;

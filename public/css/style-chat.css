@@ -1,0 +1,100 @@
+
+section{
+    margin-top: 3%;
+}
+
+.card-body.friends{
+    height: 80vh;
+    overflow-y: auto; 
+}
+
+.chat{
+    display: none;
+    overflow: hidden;
+    visibility: hidden;
+    display: none;
+  }
+
+.chat.active{
+    background: url(/img/chat.png);
+    background-repeat: repeat;
+    background-size: cover;
+    padding: 5px;
+    display:flex;
+    flex-direction: column;
+    min-height: 80vh;
+    height: 80vh;
+    /*justify-content: flex-end;  */
+    visibility: visible;
+    overflow: visible;
+  }
+
+.chat-container{
+    
+    border-radius: 8px;
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+}
+
+.list-unstyled.chat{
+    height: 100%;
+    max-height: 100%;
+   
+}
+
+.chat-container::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento */
+  }
+  
+  .chat-container::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Color de fondo de la barra de desplazamiento */
+  }
+  
+  .chat-container::-webkit-scrollbar-thumb {
+    background-color: #888; /* Color del agarre de la barra de desplazamiento */
+    border-radius: 5px; /* Radio de borde del agarre de la barra de desplazamiento */
+  }
+  
+  .chat-container::-webkit-scrollbar-thumb:hover {
+    background-color: #555; 
+  }
+
+  textarea {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    height: 40px;
+    box-shadow: none;
+    outline: none;
+    resize: none;
+  }
+  
+
+  .welcome-box{
+    overflow: hidden;
+    visibility: hidden;
+    display: none;
+  }
+
+  .welcome-box.active{
+    overflow:visible;
+    visibility: visible;
+    display: block;
+  }
+
+  .welcome-container{
+    background: url(/img/chat.png);
+    background-repeat: repeat;
+    background-size: cover;
+    background-color: #cfcece;
+    padding: 5px;
+    display:flex;
+    flex-direction: column;
+    min-height: 80vh;
+    height: 80vh;
+    justify-content: center;
+    align-items: center;
+  }

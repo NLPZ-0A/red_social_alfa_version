@@ -1,10 +1,11 @@
 let inputPost = document.getElementById("input-container-text");
 //let postInput = document.querySelector(".post-input-container");
-let overlay = document.querySelector(".overlay");
+let overlay = document.querySelector(".overlay.add");
 let popup = document.querySelector(".popup");
 let cerrarPopup = document.querySelector("#btn-cerrar-popup");
 let prevImage= document.querySelector("#imagenPrevisualizacion");
 let inputImage = document.querySelector('.upload-hide');
+
 let submitButton = document.querySelector('input.btn-submit');
 
 
@@ -13,6 +14,7 @@ inputPost.addEventListener('click', ()=>{
     overlay.classList.add('active');
     inputPost.blur();
 });
+
 
 
 cerrarPopup.addEventListener('click', ()=>{
@@ -37,7 +39,7 @@ inputImage.addEventListener("change", ()=>{
 
 
 const submitData = (e)=>{
-    e.preventDefaultU();
+    e.preventDefault();
 
     fetch(`/post/editPost/${id}`,{
         method: 'POST',
@@ -51,3 +53,11 @@ const submitData = (e)=>{
             }
         })
 };
+
+
+
+submitButtonReply.addEventListener('click', ()=>{
+    console.log('click');
+    overlayReply.classList.add('active');
+    inputPost.blur();
+});

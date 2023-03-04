@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('./partials/head_no_bp'); %>
+    <link rel="stylesheet" href="/css/style-modal.css">
+    <link rel="stylesheet" href="/css/loader.css">
+
+    <!-- <script src="/js/openPopup.js" defer></script> -->
+    
+    
+</head>
+<body>
+    
+    <%- include('./partials/navbar'); %>
+
+
+    <div class="centerLoader active" id="onload">
+        <div class="loadingio-spinner-eclipse-y8u15f3ar1i">
+            <div class="ldio-zzugt4gcsy">
+                <div></div>
+            </div>
+        </div>
+    </div>
+     
+    <div class="box-friends">
+        <p>Mis amigos </p>
+
+        <div class="search-container">
+            <input type="text" class="input-search" placeholder="ingrese el nombre de usuario...">
+            <button class="button-search">
+                <i class='bx bx-search'></i>
+            </button>
+        </div>
+
+        <% if(friends){%>
+            <% friends.forEach((friend) => { %>
+                <div class="friend">
+                    <% if (friend.image) {%>
+                        <a href="/profile/<%= friend.username %>"> <img src="/images/<%= friend.image %>" alt="img-avatar"> </a>
+                    <% } else{%>
+                        <a href="/profile/<%= friend.username %>"> <img src="/img/user.png" > </a>
+                    <% } %>
+
+                    <div>
+                        <p><a href="/profile/<%= friend.username %>"><%= friend.name %></a></p>
+                    </div>
+
+                    <div class="connect">
+                        
+                    </div>
+
+                </div>
+                <hr>
+           <% }); %>
+        <% } %>
+    </div>
+   
+        <%- include('./partials/post'); %>
+
+
+    <% if(post) {%>
+        <script src="/js/postController.js" defer></script>
+    <% } %>
+        
+
+    <script defer>
+
+        let subMenu = document.getElementById("subMenu");
+       
+
+        function toggleMenu(){
+            subMenu.classList.toggle("open-menu");
+        }
+
+    </script>
+
+    <script src="/js/load.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</body>
+</html>

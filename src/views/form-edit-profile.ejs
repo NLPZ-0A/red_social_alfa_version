@@ -1,0 +1,73 @@
+<div class="config-forms">
+    <div class="profile-form-container">
+        <form class="profile-form" >
+
+            <h3 class="title-form" style="color: rgb(199, 196, 196);">Información del perfil</h3>
+            <% if(profileData){ %>
+                <div class="inputs-container">
+
+                    <div class="first-section">
+                        <label for="name"> Nombre</label>
+                        <input type="text" name="name" placeholder="nombre de usuario..."   value="<%= user.name %>" class="field text">
+
+                        <label for="phone"> Teléfono </label>
+                        <input type="text" name="phone" placeholder="numero de telefono..."   value="<%= profileData.telefono %>" class="field text">
+
+                        <label for="job"> Empleo </label>
+                        <input type="text" name="job" placeholder=" trabaja en..."  value="<%= profileData.trabajo %>" class="field text">
+
+                        <label for="positionJob"> Cual es su cargo</label>
+                        <input type="text" name="positionJob" placeholder="cargo en su empleo..." value="<%= profileData.cargo %>" class="field text">
+
+                    </div>
+
+                    <div class="second-section">
+                        <label for="location">Ubicación actual</label>
+                        <input type="text" name="location" placeholder="lugar de residencia..." value="<%= profileData.ubicacion %>" class="field text">
+
+                        <label for="birthday"> Fecha de nacimiento</label>
+                        <input type="date" name="birthday" value="<%= profileData.cumpleaños %>" class="field date">
+
+                        <label for="description"> Descripción</label>
+                        <textarea name="description" placeholder="Describete brevemente..."  class="field textarea" ><%= profileData.descripcion %></textarea>
+                    </div>
+                </div>
+            <% }else{ %>
+                <div class="inputs-container">
+
+                    <div class="first-section">
+                        <label for="name"> Nombre</label>
+                        <input type="text" name="name" placeholder="nombre de usuario..."   value="<%= user.name %>" class="field text">
+
+                        <label for="phone"> Teléfono </label>
+                        <input type="text" name="phone" placeholder="numero de telefono..."   value="" class="field text">
+
+                        <label for="job"> Empleo </label>
+                        <input type="text" name="job" placeholder=" trabaja en..."  value="" class="field text">
+
+                        <label for="positionJob"> Cual es su cargo</label>
+                        <input type="text" name="positionJob" placeholder="cargo en su empleo..." value="" class="field text">
+
+                    </div>
+
+                    <div class="second-section">
+                        <label for="location">Ubicación actual</label>
+                        <input type="text" name="location" placeholder="lugar de residencia..." value="" class="field text">
+
+                        <label for="birthday"> Fecha de nacimiento</label>
+                        <input type="date" name="birthday" value="" class="field date">
+
+                        <label for="description"> Descripción</label>
+                        <textarea name="description" placeholder="Describete brevemente..."  class="field textarea" ></textarea>
+                    </div>
+                </div>
+            <% } %>
+
+            <div class="input-submit">
+                <input type="submit" class="send-button" value="enviar" >
+            </div>
+        </form>
+    </div>
+
+ 
+</div>

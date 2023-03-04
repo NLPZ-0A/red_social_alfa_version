@@ -25,11 +25,23 @@ module.exports = class User{
         let query=`SELECT * FROM user WHERE id='${id}'`;
         return await this.doQuery(query);
     }
+    
+    async getPredictByUsername(username){
+        let predict = `${username}_%`
+        let query = `SELECT * FROM user WHERE username LIKE ${db.escape(predict)};`;
+        return await this.doQuery(query);
+    }
+
+    async getFollowedsUsers(user_id){
+        let query = `SELECT user.* FROM user JOIN followers ON followers.followed_id = user.id WHERE followers.follower_id = ${db.escape(user_id)}`;
+        return await this.doQuery(query);  
+    }
 
     async addFollower(from_user_id, to_user_id){
         let query = `INSERT INTO followers SET  follower_id='${db.escape(from_user_id)}', followed_id='${db.escape(to_user_id)}'`;
         return await this.doQuery(query);  
     }
+
     async allRelationsFollowers(id){
         let query = `SELECT * FROM followers WHERE followed_id=${db.escape(id)}`;
         return await this.doQuery(query);
@@ -85,7 +97,7 @@ module.exports = class User{
             });
         });
 
-        return promesa;
+        return  promesa;
     }
 
     async doQueryExecute(query){

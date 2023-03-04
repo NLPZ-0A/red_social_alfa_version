@@ -16,7 +16,7 @@ const register = async(req, res)=>{
 
             auth_mail.sendConfirmation(data);
 
-            constsaveUser = await user.saveUser()
+            const saveUser = await user.saveUser()
 
             res.status(200);
 

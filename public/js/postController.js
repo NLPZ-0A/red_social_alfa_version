@@ -3,6 +3,9 @@ let inputPost = document.getElementById("input-container-text");
 let overlay = document.querySelector(".overlay");
 let popup = document.querySelector(".popup");
 
+let overlayReply = document.querySelector(".overlay.replyPost");
+let submitReplyPost = document.querySelector(".btnReply");
+
 let buttonsOfEditEvent = document.querySelector('.post-menu-wrap > .post-menu-button.edit');
 let cerrarPopup = document.querySelector("#btn-cerrar-popup"); //|| document.querySelector(".overlay");
 let prevImage= document.querySelector("#imagenPrevisualizacion");
@@ -83,12 +86,11 @@ overlay.addEventListener("click", function(event) {
 
 $('body').click( (e)=>{
 
-       console.log(e.target.classList[0]);
+    
     // Si se hizo clic en el modal, no haga nada
     if (e.target.classList[0] === 'post-menu-wrap' || e.target.classList[0] === 'far') return;
   
     // De lo contrario, cierra el modal
-    console.log('cierre');
     $('.post-menu-wrap').removeClass('active');
 
 });
@@ -132,6 +134,22 @@ $(document).on('click','.post-menu-button.edit', function() {
     
     });
 
+//-------------------------------------compartir post-----------------------------------------
+$(document).on('click','.post-ico.compartir', function() {
+    let id = this.id;
+    overlayReply.classList.add('active');
+    submitReplyPost.setAttribute("id", id);
+});
+    
+
+
+//-----------------------------------------ir a post-------------------------------------------------
+$(document).on('click','.mark-reply', function() {
+    let id = this.id;
+    console.log(id);
+   // window.location.href =`${window.location.origin}/post/${id}`;
+});
+
    
 //------------------------------------------Cargar image en formulario-----------------------------------------------------------
 inputImage.addEventListener("change", ()=>{
@@ -173,6 +191,11 @@ $('input.btn-submit').unbind().click( function(e) {
 //--------------------------------------cerrar el formulario base-------------------------------------------------------------------
 cerrarPopup.addEventListener('click', ()=>{
     overlay.classList.remove('active');
+});
+
+
+$(document).on('click', '.btn-cerrar-popup', ()=>{
+    overlayReply.classList.remove('active');
 });
 
 //------------------------------------------------envio de post al backend añadir------------------------------------------------------------
@@ -272,6 +295,7 @@ $(document).on('click','.post-menu-button.delete', function() {
   });
 
 
+//----------------------------------------------------------------borrarPost----------------------------------------------------------------------
 const deletePost = (id) => {
     try {
         let token = document.querySelector('meta[name="csrf"]').getAttribute('content');
@@ -311,6 +335,50 @@ const deletePost = (id) => {
         throw err;
     }
 }
+
+//----------------------------------------------------------------compartirPost------------------------------------------------------------------------
+const submitReplyData = (id, content)=>{
+    try{
+    $('#onload').fadeIn();
+    if (isRequesting) return;
+    let token = document.querySelector('meta[name="csrf"]').getAttribute('content');
+
+    console.log(token);
+ 
+     fetch(`/post/replyPost/${id}`,{
+         credentials :'same-origin',
+         headers : {
+             'X-CSRF-TOKEN': token ,
+             'Content-Type' : 'application/json'
+         },
+         method: 'POST',
+         body : JSON.stringify({content : content})
+         })
+         .then((response) =>{
+             console.log(response.ok);
+             isRequesting = false;
+             if(response.ok){
+                 return location.reload();
+                 console.log(response);
+                 console.log('recargado');
+             }
+             $('#onload').fadeOut();
+         })
+ 
+     }catch(err){
+         isRequesting = false;
+         throw err;
+     }
+ };
+
+ $(document).on('click', '.btnReply', (e)=>{
+    e.preventDefault();
+    let content = document.querySelector('.postReplyInput').value;
+    let id =  submitReplyPost.id;
+    console.log(content);
+    console.log(id);
+    submitReplyData(id, content)
+});
 
 });
 

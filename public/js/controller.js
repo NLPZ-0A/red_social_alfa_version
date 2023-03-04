@@ -18,7 +18,7 @@ const loginControl = () =>{
         method: 'POST',
         credentials: 'same-origin', 
         headers: {
-        'content-type':'application/json',
+        'Content-Type':'application/json',
         'X-CSRF-TOKEN': token  // <--- aquí el token
         },
         body:  JSON.stringify({

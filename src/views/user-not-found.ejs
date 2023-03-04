@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="./css/loader.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/style_home.css"> 
+    <link rel="stylesheet" type="text/css" href="/css/user_not_found.css"> 
+    <link rel="stylesheet" type="text/css" href="https://necolas.github.io/normalize.css/8.0.1/normalize.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+
+</head>
+<body>
+    
+    <%- include('./partials/navbar'); %>
+
+
+  <section>
+    <div class="content-container">
+        <div>
+            <p class="warning-text">Lo sentimos el usuario no ha sido encontrado. Compruebe si existe o ingresarlo correctame.</p>
+            <p class="icon-user" ><i class='bx bxs-user-x'></i></p>
+        </div>
+        <div>
+            <p class="warning-text">Aqui le podemos dar una lista de sugerencias de usuarios</p>
+        </div>
+
+        <div>
+            <% if(users){%>
+                <% users.forEach(user => { %>
+                    <div class="profile-container">
+                        <% if (user.image) {%>
+                            <div class="profile-image">
+                                <a href="/profile/<%= user.username %>"> <img src="/files/<%= user.image%>" alt="img-avatar"> </a>
+                            </div>
+                        <% } else{%>
+                            <div class="profile-image">
+                                <a href="/profile/<%= user.username %>"> <img src="/img/user.png" > </a>
+                            </div>
+                        <% } %>
+                        
+                        <div class="username">
+                            <a href="/profile/<%= user.username %>">
+                                <p class="text-user"><%= user.username %></p>
+                            </a>
+                        </div>
+                    </div>
+                <% });%>
+            <%} else{ %>
+             <p>no existe ningun usuario coincidente</p>
+            <% } %>
+        </div>
+       
+    </div>
+  </section>
+
+
+
+    <script defer>
+
+        let subMenu = document.getElementById("subMenu");
+       
+
+        function toggleMenu(){
+            subMenu.classList.toggle("open-menu");
+        }
+
+    </script>
+
+    <script src="/js/load.js"></script>
+    <script src="/js/navSearchController.js"></script>
+  
+</body>
+</html>

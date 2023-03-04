@@ -1,0 +1,222 @@
+
+<div class="post-section" style="margin-top: 100px;">
+    
+
+
+    <div class="post-container" id="post-div<%= post.id %>" name="<%= post.id %>">
+    
+        <div class="user-profile">
+                <% if (post.profile_image_user) {%>
+                    <a href="/profile/<%= post.username %>"> <img src="/images/<%= post.profile_image_user%>" alt="img-avatar"> </a>
+                <% } else{%>
+                    <a href="/profile/<%= post.username %>"> <img src="/img/user.png" > </a>
+                <% } %>
+    
+                <div class="date-pub">
+                    <p><a href="/profile/<%= post.username %>"><%= post.name %></a></p>
+                    <span><%=post.date%></span>
+                </div>
+    
+                <% if (currentUser.username === post.username) {%>
+                    <div class="edit-post" data-submenu-id="<%= post.id %>">
+
+                        <a class="edit-icon" id ="<%= post.id %>"><i class='bx bx-edit'></i></a>
+                    </div>
+    
+                    <div class="post-menu-wrap" data-value-edit="<%= post.id %>">
+                        <div class="post-menu-button edit" data-edit-id="<%= post.id %>">
+                            <a> Editar post </a>
+                        </div>
+                        <hr>
+                        <div class="post-menu-button delete" data-delete-id="<%= post.id %>">
+                            <a> Eliminar post </a> 
+                        </div>
+                        <hr>
+                         <div class="post-menu-button close" id="close-window" data-close-id="<%= post.id %>">
+                            <a > Cerrar </a>
+                        </div>
+                    </div>
+                <% } %>
+                    
+        </div>
+            
+        <p class="post-text <%= post.id %>"><%= post.content %></p>
+    
+        <% if(post.image !== '') {%>
+            <div  class="post-image">
+                <img src="<%= post.image %>" class="postImage _<% post.id %>">
+            </div>
+        <% } %>
+    
+        <hr>
+
+        <div class="add-post-buttons"> 
+                    <% if(!post.iLikePost) { %>   
+                        <div class="post-ico button-like like" id="<%= post.id %>" value="like" data-value="<%= post.id %>">
+                            <i class="fa-regular fa-thumbs-up"></i> Like <%= post.likesCount %>
+                        </div> 
+                    <% }else { %>
+                        <div class="post-ico button-like unlike" id="<%= post.id %>" value="unlike" data-value="<%= post.id %>">
+                            <i class="fa-regular fa-thumbs-down"></i> like <%= post.likesCount %>
+                        </div>
+                    <% } %>
+    
+                    <div class="post-ico comments" id="<%= post.id %>">
+                        <i class="far fa-comment"></i> Comments 
+                    </div> 
+    
+                    <div class="post-ico compartir" id="<%= post.id %>"><i class="fa-solid fa-share"></i> compartir</div> 
+        </div>
+
+        <hr>
+    
+        <div class="box-comment _<%= post.id %>">
+                    <div class="input-comment">
+                        <div class="input-text">
+                            <input type="text"  placeholder="Escribe un comentario..." id="input-text-comment" class="comments-input<%=post.id%>">
+                        </div>
+                       
+                        <div class="icons">
+                            <div class="icons-media">
+                                <div class="icon gif">
+                                    <i class='bx bxs-file-gif' ></i>
+                                </div>
+    
+                                <div class="icon pic">
+                                    <i class='bx bxs-camera'></i>
+                                </div>
+    
+                                <div class="icon video">
+                                    <i class='bx bxs-videos' ></i>
+                                </div>
+                            </div>
+    
+                            <div class="icons-comments">
+                                <div class="icon send" id="send">
+                                    <i class='bx bxs-send' id="<%= post.id %>"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+        </div>
+            
+       
+    <% if(comments){%>
+        
+    <%= comments.length %> comentarios
+        
+    <% comments.forEach(comment  => {%>
+    <div class="comment">
+        <% if(comment.username === currentUser.username){ %>
+            <div class="edit-comment-icon" >
+                <div>
+                    <i class='bx bxs-edit' id="<%= comment.id %>"></i>
+                </div>
+            </div>
+
+            <div class="comment-menu-wrap" id="comment-menu-<%= comment.id%>">
+                <!--<div class="comment-menu-button edit" data-edit-id="<%= comment.id %>">
+                    <a> Editar comentario </a>
+                </div>-->
+                <hr>
+                <div class="comment-menu-button delete" data-deleteid="<%= comment.id %>">
+                    <a> Eliminar comentario </a> 
+                </div>
+                <hr>
+                 <div class="comment-menu-button close" id="close-window" data-closeid="<%= comment.id %>">
+                    <a id="<%= comment.id %>"> Cerrar </a>
+                </div>
+            </div>
+        <% } %>
+
+        <div class="user-profile">
+            <div class="user-image">
+                <% if(comment.image) {%>
+                    <a href="/profile/<%= comment.username %>"> <img src="/images/<%= comment.image%>" alt="img-avatar"> </a>
+                <% } else{%>
+                    <a href="/profile/<%= comment.username %>"> <img src="/img/user.png" > </a>
+                <% } %>
+            </div>
+
+            <div class="content-comment">
+                <div class="name-user">
+                    <p><a href="/profile/<%= comment.username %>"><%= comment.name %></a></p>
+                    <span><%=comment.date%></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="textContent">
+            <p class="comment-text"><%= comment.content %></p>
+        </div>
+        <hr>
+        <div class="icons-buttons">
+
+        <% if(!comment.iLikeComment){%>
+
+            <div class="icon like">
+                <a class="buttonLikeComment" id="likeComment" data-id="<%= comment.id %>">Me gusta</a>
+            </div>
+        <%}else {%>
+            <div class="icon like" style="padding: 8px; border-radius: 2px; background-color: rgb(138, 138, 248);">
+                <a class="buttonLikeComment" id="removeLikeComment" data-id="<%= comment.id %>">Me gusta</a>
+            </div>
+        <% }%>
+
+            <div class="icon response">
+                <a class="responseButton" id="response" data-name="<%=comment.name%>" data-id="<%= comment.id %>">Responder</a>
+            </div>
+
+            <div class="icon compartir">
+                Compartir
+            </div>
+
+        </div>
+        <hr>
+
+    </div>
+
+    
+
+
+    <% }); %>
+
+    <%}%>
+    </div>
+             
+</div>
+
+<div class="overlay">
+    <div class="popup">
+        <div id="cerrar-popup-container">
+            <a id="btn-cerrar-popup" class="btn-cerrar-popup">
+                <i class="fa-solid fa-x"></i>
+            </a>
+        </div>
+
+        <h4>Editar Post</h4>
+        <form  enctype="multipart/form-data" class="form-post add">
+
+            <div class="contenedor-inputs">
+
+                <input name="content" type="text" class="input-text" placeholder="Texto del post...">
+                
+                <div class="upload-container">
+                            <input name="image" type="file" class="upload-hide" id="upload-custom">
+                            <label for="upload-custom" class="upload-label">
+                                <i class="uil uil-export"></i>
+                                <p class="dragText">Drag & Drop to upload file</p>
+                                <img id="imagenPrevisualizacion" class="image-prev">
+                                
+                                <!--<input name="image" type="file" class="uploadHide" id="uploadCustom"> -->
+                            </label> 
+                </div>
+            </div>
+
+                <input type="submit" class="btn-submit" value="enviar">
+        </form>
+
+        
+    </div>
+</div>

@@ -1,0 +1,157 @@
+.box-comment{
+    display: none;
+}
+.box-comment.active{
+    display: block;
+}
+
+.box-comment .input-comment{
+    background-color: rgb(230, 229, 229);
+    margin-top: 5px;
+    cursor: text;
+    border-radius: 4px;
+}
+
+.box-comment .input-text{
+   color: rgb(80, 79, 79);
+   padding: 8px;
+}
+
+.box-comment .input-text input{
+    background-color: rgb(230, 229, 229);
+    width: 100%;
+    height: 100%;
+    outline: none;
+    border: inherit;
+    border: none;
+ }
+
+ .box-comment .icons{
+    display: flex;
+    flex-direction: row;
+    border: none;
+    
+ }
+
+ .box-comment .icons i{
+    cursor: pointer;
+
+ }
+
+
+.box-comment .icons-comments{
+    display: flex;
+    justify-content: end;
+    font-size: 20px;
+    margin-left: 78%;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: rgb(230, 229, 229);
+    color: rgb(80, 79, 79); 
+}
+.box-comment .icons-media{
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 10px;
+    border-radius: 4px;
+    background-color: rgb(230, 229, 229);
+    color: rgb(80, 79, 79); 
+}
+
+.box-comment .icons-media .icon{
+    margin: 6px;
+}
+
+.box-comment .icons-comments #send{
+    cursor: pointer;
+}
+
+
+.comment{
+    margin: 15px;
+    padding: 20px;
+    border: solid 1px #cdc3c3;
+    border-radius: 20px;
+}
+
+.comment .user-profile{
+    display: flex;
+}
+
+.comment-text{
+    margin: 4px;
+    padding: 5px;
+    background-color: rgb(253, 250, 250);
+    border-radius: 4px;
+    font-size: 20px;
+    color: rgb(57, 65, 83);
+    padding-left: 5%;
+}
+
+.icons-buttons{
+    display: flex;
+
+}
+.icons-buttons .icon{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 8px;
+    
+}
+
+.icons-buttons .icon:hover{
+    background-color: rgb(212, 212, 212);
+    cursor: pointer;
+}
+
+.edit-comment-icon{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    color: #404040;
+    font-size: 20px;
+    padding: 5px;
+    border-radius: 2px;
+}
+
+.edit-comment-icon   i:hover{
+    background-color: rgb(212, 212, 212);
+   
+   cursor: pointer;
+}
+
+
+.comment-menu-wrap{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 255px;
+  
+    background: white;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, .3);
+    color: black;
+    border-radius: 3px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+    visibility: hidden;
+}
+
+.comment-menu-wrap.active{
+    visibility: visible;
+}
+.comment-menu-wrap >a{ 
+    text-decoration: none;
+    color: #121213;
+
+}
+
+.comment-menu-wrap > .comment-menu-button{ 
+    transition: all 0.3s;
+}
+.comment-menu-wrap > .comment-menu-button:hover{ 
+    background-color: #cccccc;
+    border-radius: 2px;
+}

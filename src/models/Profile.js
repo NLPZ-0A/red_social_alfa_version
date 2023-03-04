@@ -2,7 +2,7 @@ const db = require('../database/db_local');
 
 module.exports = class Profile {
 
-        constructor(data){
+        constructor(data = {}){
             this.user_id = data.user_id;
             this.phone = data.phone;
             this.job = data.job;
@@ -12,23 +12,46 @@ module.exports = class Profile {
             this.description = data.description;
         }
 
-        async saveProfile(){
-            const profileData = profileData();
-            const query = `INSERT INTO profiles (user_id, data) VALUES (${db.escape(this.user_id)}, ${db.escape(JSON.stringify(profileData))})`;
-            //const data = [this.user_id, JSON.stringify(profileData)];
-            
-            return this.doQueryArray(query, data);
+        async profileDataObject(){
+            return {
+                    telefono: this.phone,
+                    trabajo : this.job,
+                    cargo : this.positionJob, 
+                    ubicacion : this.location,
+                    cumpleaños : this.birthday, 
+                    descripcion : this.description
+            }
         }
 
-        async profileData(){
-            return {
-                    phone : this.phone,
-                    job : this.job,
-                    positionJob : this.positionJob, 
-                    location : this.location,
-                    birthday : this.birthday, 
-                    description : this.description
-            }
+        async saveProfile(){
+            const profileData =  await this.profileDataObject();
+            console.log(profileData);
+
+            const query = `INSERT INTO profiles SET user_id = ?, ?`;
+            const data = [db.escape(this.user_id), profileData];
+            
+            return await this.doQueryArray(query, data);
+        }
+
+        async updateProfile(){
+            const profileData =  await this.profileDataObject();
+            console.log(profileData);
+
+            const query = `UPDATE profiles SET ? WHERE user_id = ?`;
+            const data = [profileData, db.escape(this.user_id)];
+            
+            return await this.doQueryArray(query, data);
+        }
+
+        async uploadPhoto(photo, id){
+            const query = `UPDATE user SET image = ${ db.escape(photo) } WHERE id = ${db.escape(id)};`;
+            return await this.doQuery(query);
+        }
+
+        async getProfileById(id){
+            const query = `SELECT * FROM profiles WHERE user_id = ${db.escape(id)}`;
+            
+            return await this.doQuery(query);
         }
 
 
@@ -47,7 +70,7 @@ module.exports = class Profile {
 
         async doQueryArray(query, data){
             let promesa = new Promise((resolve, reject) =>{
-                let NuestroQuery = query;
+                const NuestroQuery = query;
                //console.log(NuestroQuery);
                     db.query(NuestroQuery, data, (err, result) =>{
                     if(err) throw err;
@@ -55,7 +78,7 @@ module.exports = class Profile {
                 });
             });
     
-            return promesa;
+            return await promesa;
         }
 
         async doQueryExecute(query){
