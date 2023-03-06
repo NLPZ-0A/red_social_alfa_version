@@ -1,10 +1,16 @@
 //obtener el cliente
 const mysql = require('mysql2');
+
 let configData;
+console.log('en la bbdd');
+
 
 if(process.env.NODE_ENV === 'production'){
+
    console.log('production');
   configData = process.env.DATABASE_URL
+
+
 }else{
   configData = {
           host : 'localhost',
@@ -24,8 +30,6 @@ if(process.env.NODE_ENV === 'production'){
 
 //crear la conexion a la base de datos
 const connection = mysql.createConnection(configData);
-
-
 
 connection.connect((error) =>{
     if(error){
