@@ -4,12 +4,7 @@ let configData;
 
 
 if (process.env.NODE_ENV === 'production'){
-configData = {
-    host : process.env.HOST,
-    port : process.env.PORT_DB,
-    password : process.env.PASSWORD_DB,
-    database : 'red_social'
-  }
+configData = process.env.DATABASE_URL
 }else{
 configData = {
         host : 'localhost',
