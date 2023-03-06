@@ -3,7 +3,8 @@ const mysql = require('mysql2');
 let configData;
 
 
-if (process.env.NODE_ENV === 'production'){
+if(process.env.NODE_ENV === 'production'){
+
 configData = process.env.DATABASE_URL
 }else{
 configData = {
@@ -12,6 +13,7 @@ configData = {
         password :'',
         database : 'red_social'
     }
+    console.log('local');
 }
   
   if (process.env.NODE_ENV === 'production') {
@@ -21,10 +23,9 @@ configData = {
     };
   }
 
-
 //crear la conexion a la base de datos
 const connection = mysql.createConnection(configData);
-console.log('Connected to PlanetScale!')
+
 
 
 connection.connect((error) =>{

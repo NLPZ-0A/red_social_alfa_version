@@ -37,7 +37,10 @@ app.use(function(req, res, next) {
   next();
 });
 
-const authRouter = require('./src/routes/authRouter.js');
+
+//-------------------------------LLAMO AL ADMINISTRADOR DE RUTAS--------------------------------
+require('./src/routes/managingRoutes')(app);
+/*const authRouter = require('./src/routes/authRouter.js');
 const postsRouter = require('./src/routes/postsRouter.js');
 const userRouter = require('./src/routes/userRouter.js');
 const profileRouter = require('./src/routes/profileRouter');
@@ -54,6 +57,7 @@ app.use('/config', configRouter);
 app.use('/comments', commentsRouter);
 app.use('/chat', chatRouter);
 app.use('/notifications', notifyRouter);
+*/
 
 
 app.use((req, res, next) => {
