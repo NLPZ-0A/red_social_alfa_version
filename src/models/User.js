@@ -1,6 +1,7 @@
 const db = require('../database/db_local');
 const dateTime = require('../tools/get_date_now');
 
+
 module.exports = class User{
 
     constructor(name, username, email, password){
@@ -8,7 +9,6 @@ module.exports = class User{
          this.username = username;
          this.email = email;
          this.password = password;
-        
     }
 
     async getUserbyEmail(email){
@@ -74,7 +74,7 @@ module.exports = class User{
     async saveUser(){
         let dateNow = dateTime.getFullDate();
         let email_value = 0;
-        let query =`INSERT INTO user SET name=${db.escape(this.name)}, username=${db.escape(this.username)}, email=${db.escape(this.email)}, password=${db.escape(this.password)}, created_at=${db.escape(dateNow)}, confirm_email=${db.escape(email_value)}`;
+        let query =`INSERT INTO user SET name=${db.escape(this.name)}, username=${db.escape(this.username)}, email=${db.escape(this.email)}, password=${db.escape(this.password)}, created_at=${db.escape(dateNow)}, confirm_email=${db.escape(email_value)};`;
         return await this.doQuery(query);
     }
 

@@ -1,12 +1,14 @@
 const User = require('../models/User');
 const Profile = require('../models/Profile');
 const Post = require('../models/post');
+const Conversation = require('../models/Conversations');
 const parseSQL = require('../tools/parseSQL');
 const { parseDate } = require('../tools/get_date_now');
 
 const postInstance = new Post();
 const userInstance = new User();
 const profileInstance = new Profile();
+const conversationInstance = new Conversation();
 
 const addProfile = async (req, res) => {
     const user_id = req.usuario.id;
@@ -133,6 +135,21 @@ const follow =  async (req, res) => {
         }else{
 
            await userInstance.addFollower(currentUser.id, toUser.id)
+
+           let conversation;
+
+
+           conversation = await conversationInstance.getConversationBetweenUsers(currentUser.id, toUser.id);
+
+           if(!conversation.length){
+             console.log('creando conversacion!');
+             const newConversations = new Conversation(currentUser.id, toUser.id);
+             const saveConversation = await newConversations.saveConversation();
+             conversation = await conversationInstance.getConversationBetweenUsers(currentUser.id, toUser.id);
+           }
+
+           //let conversation_id = conversation[0].id;
+
            return res.redirect(`/profile/${username}`);
         }
     }catch(err){

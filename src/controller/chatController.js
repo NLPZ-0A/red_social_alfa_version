@@ -8,7 +8,7 @@ const chatApp = async(req, res) =>{
     try{
         const currentUser = req.usuario;
         const friends = await userInstance.getFollowedsUsers(currentUser.id);
-        console.log(friends);
+     
         return res.render('chat', {currentUser:currentUser , friends :friends, layout: false});
     }catch(err){
         console.log(err);

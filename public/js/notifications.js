@@ -4,7 +4,7 @@ $(document).ready(()=>{
     const renderNotifications = (notification) =>{
         let profileImage ;
 
-        let boxNotify = $('.box-notify');
+        let boxNotify = $('.boxNotifyUL');
 
         console.log(notification.sender_image);
 

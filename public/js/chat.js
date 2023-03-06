@@ -4,19 +4,21 @@ $(document).ready(()=>{
     var user;
     var receiver = [];
 
-    $(document).on('click','#sendMessage', async function(){
+$(document).on('click','#sendMessage', async function(){
         let User = await getData();
        
         const text = document.querySelector('#textAreaExample2').value;
         console.log(text);
 
+
         sendMessageSocket(User, text);
 
         document.querySelector('#textAreaExample2').value = '';
-    });
+});
 
-    $(document).on('click','.user-friend', async function(){
+$(document).on('click','.user-friend', async function(){
         let id = this.id ;
+        console.log(id);
         const currentUser = getData();
 
 
@@ -34,7 +36,11 @@ $(document).ready(()=>{
         receiver.push(this.getAttribute('name'));  
 
       let messages = await getMessages(id);
-  
+      let getKeyCipher = await getKey(id);
+
+      console.log(getKeyCipher.key);
+
+      let key = getKeyCipher.key;
 
       $('#box-welcome').removeClass('active');
       $('.chat').addClass('active');
@@ -50,6 +56,9 @@ getMessages(id)
                 profileImage = '/img/user.png';
               }  
 
+            let decryptMessageBin = CryptoJS.AES.decrypt(message.message, key);
+            const decryptMessage = decryptMessageBin.toString(CryptoJS.enc.Utf8);
+
             let herMessage =`<li class="d-flex justify-content-between mb-4">
                             
                                 <img src="${profileImage}" alt="avatar"
@@ -61,7 +70,7 @@ getMessages(id)
                                   </div>
                                   <div class="card-body">
                                     <p class="mb-0">
-                                      ${message.message}
+                                      ${decryptMessage}
                                     </p>
                                   </div>
                                 </div>
@@ -77,7 +86,7 @@ getMessages(id)
                                 </div>
                                 <div class="card-body">
                                   <p class="mb-0">
-                                    ${message.message}
+                                    ${decryptMessage}
                                   </p>
                                 </div>
                               </div>
@@ -97,16 +106,40 @@ getMessages(id)
 
   });                                                                         
     
-    });
+});
 
-
-    socket.on('nuevo mensaje', async(data) =>{
+socket.on('nuevo mensaje', async(data) =>{
 
         let messages = document.querySelectorAll('#message');
         let user = data.user;
         let currentUser = await getData();
+        
 
-        let mensaje = data.msg;
+        console.log(data.msg);
+
+
+        let friends = document.querySelectorAll('.user-friend');
+    let id_receiver;
+
+      friends.forEach(element =>{
+        console.log(element.getAttribute('name'));
+          if(element.getAttribute('name') === receiver[0]){
+            id_receiver = element.id;
+          }
+        });
+
+        console.log(id_receiver);
+
+        let getKeyCipher = await getKey(id_receiver);
+
+        console.log(getKeyCipher.key);
+
+        let key = getKeyCipher.key;
+
+        let decryptMessage = CryptoJS.AES.decrypt(data.msg, key);
+        const decryptedText = decryptMessage.toString(CryptoJS.enc.Utf8);
+
+        let mensaje = decryptedText;
         let profileImage;
         
         if(user.image){
@@ -158,21 +191,45 @@ getMessages(id)
                 }else if(user.username !== currentUser.user.username && data.msg.length > 0){
                   chatContainer.append(herMessage);
                 }
-    });
+  });
 
+socket.on('unread', (data)=>{
+  console.log(data);
+  
+});
 
-  function sendMessageSocket(user, text){
-      
+async function sendMessageSocket (user, text){
+
+    let friends = document.querySelectorAll('.user-friend');
+    let id_receiver;
+
+    friends.forEach(element =>{
+      console.log(element.getAttribute('name'));
+      if(element.getAttribute('name') === receiver[0]){
+        id_receiver = element.id;
+      }
+      });
+
+      console.log(id_receiver);
+
+      let getKeyCipher = await getKey(id_receiver);
+
+      console.log(getKeyCipher.key);
+
+      let key = getKeyCipher.key;
+
+    const textEncrypted = CryptoJS.AES.encrypt(text, key).toString();
+
         if(receiver.length === 1){
           socket.emit('enviar mensaje', {
               sender : user,
               receiver : receiver[0],
-              message : text
+              message : textEncrypted 
           });
         }else{
           console.log('error al enviar el mensaje');
         }
-    }
+  }
 
 const getData = async () => {
     console.log('getData() se ha llamado.');
@@ -187,10 +244,10 @@ const getData = async () => {
     };
 
 
-const getMessages = async (id) => {
+const getKey = async (id) => {
       let token = document.querySelector('meta[name="csrf"]').getAttribute('content');
-      console.log('getData() se ha llamado.');
-      const response = await fetch(`${window.location.origin}/chat/responseChat/${id}`,{
+      console.log('getKey() se ha llamado.');
+      const response = await fetch(`${window.location.origin}/chat/getKey/${id}`,{
         credentials :'same-origin',
         method : 'POST',
         headers: {
@@ -199,19 +256,39 @@ const getMessages = async (id) => {
       });
 
           if(response.status === 200){
-              const messages = await response.json();
-              return messages;
+              const myKey = await response.json();
+              return myKey;
             }
 
         return;
       };
 
+const getMessages = async (id) => {
+        let token = document.querySelector('meta[name="csrf"]').getAttribute('content');
+        console.log('getData() se ha llamado.');
+        const response = await fetch(`${window.location.origin}/chat/responseChat/${id}`,{
+          credentials :'same-origin',
+          method : 'POST',
+          headers: {
+            'X-CSRF-TOKEN': token
+          }
+        });
+  
+            if(response.status === 200){
+                const messages = await response.json();
+                return messages;
+              }
+  
+          return;
+        };
+
 
 const connection = async() => {
 
   const data = await getData();
-
+  
   socket.emit("user_connected", data.user.username);  
+    
 
 
   let connectDiv= `<div class="pt-1">
@@ -228,8 +305,6 @@ const connection = async() => {
 ( async function(){
      await connection();
 })();
-
-
 
 
 });

@@ -13,12 +13,6 @@ const app = require('./server');//llamo al servidor
 
 app.use(cookierParser());
 
-app.use((req,res, next) =>{
-    req.custom = ' realmentefuncado';
-    next();
-  }
-)
-
 const viewsPath = path.join(__dirname, './src/views')
 app.use(express.urlencoded({ extended: true }));
 app.engine('ejs', require('ejs').__express);
@@ -34,14 +28,6 @@ app.use(express.json());
 //app.use(xss);
 
 //-------------------------------csrf token--------------------------------------------------
-
-/*app.use((req,res,next) =>{
-  if(req.method === 'POST'){
-    console.log(req.body);
-  }
-  next()
-});*/
-
 app.use(csurf({ cookie: { httpOnly: true, }}));
 
 app.use(function(req, res, next) {
@@ -67,6 +53,13 @@ app.use('/comments', commentsRouter);
 app.use('/chat', chatRouter);
 app.use('/notifications', notifyRouter);
 
+
+app.use((req, res, next) => {
+  if (!req.cookies.uid) {
+    req.cookies.uid = Math.random().toString(36).substr(2, 9);
+  }
+  next();
+});
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);

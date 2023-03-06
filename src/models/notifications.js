@@ -29,6 +29,16 @@ module.exports = class Notification{
             return this.doQuery(query);
         }
 
+        async getLastNotifications(id){
+            //let query = `SELECT * FROM notifications WHERE user_id = ${db.escape(id)} ORDER BY created_at DESC;`;
+            //let query = `SELECT * FROM notifications WHERE user_id=${db.escape(id)} ORDER BY created_at DESC LIMIT 1;`;
+            let query= `SELECT notifications.*, user.username AS sender_username, user.image AS sender_image FROM notifications JOIN user ON notifications.sender_id = user.id WHERE notifications.user_id = ${db.escape(id)} ORDER BY created_at DESC LIMIT 1;`;
+
+            return this.doQuery(query);
+        }
+
+       
+
         async doQueryArray(query, data){
             let promesa = new Promise((resolve, reject) =>{
                 const NuestroQuery = query;

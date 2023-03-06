@@ -1,5 +1,6 @@
 const db = require('../database/db_local');
 
+
 module.exports = class Message{
 
         constructor(conversation_id, receiver_id, sender_id, message){
@@ -7,6 +8,8 @@ module.exports = class Message{
            this.receiver_id = receiver_id;
            this.sender_id = sender_id;
            this.message = message;
+
+          
         }
 
         async saveMessage(){

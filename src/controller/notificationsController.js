@@ -29,7 +29,7 @@ const getNotifications = async(req, res) =>{
                 notifications.push(notification);
         });
 
-        console.log(notifications);
+
                           
     return res.status(200).send(notifications);
     }catch(err){
