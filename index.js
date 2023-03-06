@@ -20,6 +20,8 @@ app.engine('html', require('ejs').renderFile);
 app.set('view engine','ejs');
 app.set('views', viewsPath)
 
+console.log('iniciando...');
+
 
 //const publicDir = path.join(__dirname, '/public');
 app.use(expressLayouts);

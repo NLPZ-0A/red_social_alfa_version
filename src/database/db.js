@@ -24,6 +24,8 @@ configData = {
 
 //crear la conexion a la base de datos
 const connection = mysql.createConnection(configData);
+console.log('Connected to PlanetScale!')
+
 
 connection.connect((error) =>{
     if(error){
@@ -33,5 +35,7 @@ connection.connect((error) =>{
 
     console.log('Conectado correctamente a la BBDD');
 });
+
+connection.end()
 
 module.exports = connection;
