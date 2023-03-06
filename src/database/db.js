@@ -10,6 +10,14 @@ if(process.env.NODE_ENV === 'production'){
    console.log('production');
   configData = process.env.DATABASE_URL
 
+        configData = {
+          host : 'aws-sa-east-1.connect.psdb.cloud',
+          port: '3306',
+          user :'u3uegk6ognbdbrtmm7ar',
+          password :'	pscale_pw_2GtCjWnHWKQtDNn7sSSRXtjLewYHyeid3oel1yV1mJe',
+          database : 'red_social'
+      }
+
 
 }else{
   configData = {
