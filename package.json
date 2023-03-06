@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "nodemon index",
     "start": "nodemon index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "optimize": "node optimization.js"
   },
   "author": "",
   "license": "ISC",
@@ -38,5 +39,8 @@
     "validator": "^13.7.0"
   },
   "keywords": [],
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "terser": "^5.16.5"
+  }
 }
