@@ -41,8 +41,10 @@ const connection = mysql.createConnection(configData);
 
 connection.connect((error) =>{
     if(error){
-        console.error(`Error de conexion: ${error}`);
+      console.log('el config data fue:');
         console.log(configData);
+        console.error(`Error de conexion: ${error}`);
+        
         return;
     }
 
