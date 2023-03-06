@@ -1,9 +1,7 @@
 require('dotenv').config();//Nos permite usar la informacion de nuesto env
 const express = require('express');
 const cookierParser = require('cookie-parser');
-const db = require("./src/database/db");
 const path = require('path');//manipulacion de los directorios
-const bodyParser = require('body-parser');
 const expressLayouts =  require('express-ejs-layouts');
 const csurf = require('csurf');
 
@@ -40,32 +38,7 @@ app.use(function(req, res, next) {
 
 //-------------------------------LLAMO AL ADMINISTRADOR DE RUTAS--------------------------------
 require('./src/routes/managingRoutes')(app);
-/*const authRouter = require('./src/routes/authRouter.js');
-const postsRouter = require('./src/routes/postsRouter.js');
-const userRouter = require('./src/routes/userRouter.js');
-const profileRouter = require('./src/routes/profileRouter');
-const configRouter = require('./src/routes/configRouter');
-const commentsRouter = require('./src/routes/commentRouter');
-const chatRouter = require('./src/routes/chatRoutes');
-const notifyRouter = require('./src/routes/notificationsRouter');
 
-app.use('/', userRouter);
-app.use('/auth', authRouter);
-app.use('/post', postsRouter);
-app.use('/profile', profileRouter);
-app.use('/config', configRouter);
-app.use('/comments', commentsRouter);
-app.use('/chat', chatRouter);
-app.use('/notifications', notifyRouter);
-*/
-
-
-app.use((req, res, next) => {
-  if (!req.cookies.uid) {
-    req.cookies.uid = Math.random().toString(36).substr(2, 9);
-  }
-  next();
-});
 
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
