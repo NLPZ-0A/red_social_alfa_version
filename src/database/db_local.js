@@ -6,6 +6,7 @@ let connection;
 
 if(process.env.NODE_ENV !== 'production'){
     console.log('local');
+    console.log(process.env.NODE_ENV);
    connection = mysql.createConnection({
         host : process.env.HOST,
         user :process.env.USER,
@@ -14,6 +15,7 @@ if(process.env.NODE_ENV !== 'production'){
     });
 }else{
     console.log('production');
+    console.log(process.env.NODE_ENV);
      connection = mysql.createConnection({
         host : 'aws-sa-east-1.connect.psdb.cloud',
           port: '3306',
