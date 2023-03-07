@@ -20,8 +20,9 @@ if(process.env.NODE_ENV !== 'production'){
         host : 'aws-sa-east-1.connect.psdb.cloud',
           port: '3306',
           user :'u3uegk6ognbdbrtmm7ar',
-          password :'	pscale_pw_2GtCjWnHWKQtDNn7sSSRXtjLewYHyeid3oel1yV1mJe',
-          database : 'red_social'
+          password :'pscale_pw_2GtCjWnHWKQtDNn7sSSRXtjLewYHyeid3oel1yV1mJe',
+          database : 'red_social',
+          ssl: { rejectUnauthorized: true },
     });
 }
 
