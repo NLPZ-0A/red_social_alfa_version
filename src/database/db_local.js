@@ -18,7 +18,8 @@ if(process.env.NODE_ENV !== 'production'){
     console.log(process.env.NODE_ENV);
     //const url = encodeURIComponent(process.env.DATABASE_URL);
     const url = process.env.DATABASE_URL;
-    connection = mysql.createConnection(url//'mysql://d34k184vnc4rp3hhhae8:pscale_pw_v4UreiQWLPaNAD3x4o32SHUzougN73MEcegjxRFLxwT@aws-sa-east-1.connect.psdb.cloud/red_social?ssl={"rejectUnauthorized":true}'
+    connection = mysql.createConnection('mysql://mt0iiwx164h626lev7ah:pscale_pw_LWDigLAzPKxfopNOzI0hEFveoyIuY33b3s62LqUI2jZ@aws-sa-east-1.connect.psdb.cloud/red_social?ssl={"rejectUnauthorized":true}'
+    
 
         /* {host : 'https://databases-auth.000webhost.com/index.php',
           port: '3306',
