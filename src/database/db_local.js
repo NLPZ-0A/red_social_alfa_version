@@ -19,7 +19,7 @@ if(process.env.NODE_ENV !== 'production'){
     const url = encodeURIComponent(process.env.DATABASE_URL);
      connection = mysql.createConnection(//url//'mysql://d34k184vnc4rp3hhhae8:pscale_pw_v4UreiQWLPaNAD3x4o32SHUzougN73MEcegjxRFLxwT@aws-sa-east-1.connect.psdb.cloud/red_social?ssl={"rejectUnauthorized":true}'
 
-         {host : 'https://databases-auth.000webhost.com/',
+         {host : 'localhost',
           port: '3306',
           user :'red_social_user',
           password :'N6k06Ba##LAjM!Gk',
