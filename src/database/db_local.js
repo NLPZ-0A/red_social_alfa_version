@@ -4,7 +4,7 @@ const mysql = require('mysql2');
 //crear la conexion a la base de datos
 let connection;
 
-if(process.env.NODE !== 'production'){
+if(process.env.NODE_ENV !== 'production'){
     console.log('local');
    connection = mysql.createConnection({
         host : process.env.HOST,
