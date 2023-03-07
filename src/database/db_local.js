@@ -2,7 +2,7 @@
 const mysql = require('mysql2');
 
 //crear la conexion a la base de datos
-let connection;
+let config
 
 if(process.env.NODE_ENV !== 'production'){
     console.log('local');
@@ -16,17 +16,17 @@ if(process.env.NODE_ENV !== 'production'){
 }else{
     console.log('production');
     console.log(process.env.NODE_ENV);
-     connection = mysql.createConnection({
-        host : 'aws-sa-east-1.connect.psdb.cloud',
+     connection = mysql.createConnection('mysql://d34k184vnc4rp3hhhae8:pscale_pw_v4UreiQWLPaNAD3x4o32SHUzougN73MEcegjxRFLxwT@aws-sa-east-1.connect.psdb.cloud/red_social?ssl={"rejectUnauthorized":true}'
+
+       /* {host : 'aws-sa-east-1.connect.psdb.cloud',
           port: '3306',
           user :'u3uegk6ognbdbrtmm7ar',
           password :'pscale_pw_2GtCjWnHWKQtDNn7sSSRXtjLewYHyeid3oel1yV1mJe',
           database : 'red_social',
-          dialectOptions : {
-            bigNumberStrings: true,
-            ssl: { rejectUnauthorized: true },
-          }
-    });
+          dialect: 'mysql',
+          dialectModule : mysql2,
+          operatorsAliases: 0,}*/
+    );
 }
 
 connection.connect((error) =>{
