@@ -16,7 +16,7 @@ if(process.env.NODE_ENV !== 'production'){
 }else{
     console.log('production');
     console.log(process.env.NODE_ENV);
-     connection = mysql.createConnection('mysql://d34k184vnc4rp3hhhae8:pscale_pw_v4UreiQWLPaNAD3x4o32SHUzougN73MEcegjxRFLxwT@aws-sa-east-1.connect.psdb.cloud/red_social?ssl={"rejectUnauthorized":true}'
+     connection = mysql.createConnection(process.env.DATABASE_URL
 
        /* {host : 'aws-sa-east-1.connect.psdb.cloud',
           port: '3306',
