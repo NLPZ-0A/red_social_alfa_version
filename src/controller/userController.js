@@ -8,7 +8,6 @@ const { getTokenData } = require('../config/jwt.config');
 const parseSQL = require('../tools/parseSQL');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
-const { json } = require('body-parser');
 moment.locale('es');
 
 const userInstance = new User();
