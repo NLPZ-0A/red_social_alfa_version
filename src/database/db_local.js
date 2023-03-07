@@ -19,11 +19,11 @@ if(process.env.NODE_ENV !== 'production'){
     const url = encodeURIComponent(process.env.DATABASE_URL);
      connection = mysql.createConnection(//url//'mysql://d34k184vnc4rp3hhhae8:pscale_pw_v4UreiQWLPaNAD3x4o32SHUzougN73MEcegjxRFLxwT@aws-sa-east-1.connect.psdb.cloud/red_social?ssl={"rejectUnauthorized":true}'
 
-         {host : 'sql10.freemysqlhosting.net',
+         {host : 'https://databases-auth.000webhost.com/',
           port: '3306',
-          user :'sql10603711',
-          password :'1631RrTnPI',
-          database : 'red_social',}
+          user :'red_social_user',
+          password :'N6k06Ba##LAjM!Gk',
+          database : 'id20305985_red_social',}
           
     );
 }
