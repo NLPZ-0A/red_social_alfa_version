@@ -22,7 +22,10 @@ if(process.env.NODE_ENV !== 'production'){
           user :'u3uegk6ognbdbrtmm7ar',
           password :'pscale_pw_2GtCjWnHWKQtDNn7sSSRXtjLewYHyeid3oel1yV1mJe',
           database : 'red_social',
-          ssl: { rejectUnauthorized: true },
+          dialectOptions : {
+            bigNumberStrings: true,
+            ssl: { rejectUnauthorized: true },
+          }
     });
 }
 
