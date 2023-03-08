@@ -3,6 +3,7 @@ const middlewareAuth = require('../middlewares/isLoggedin');
 const fileController =  require('../middlewares/uploadImage');
 const postController = require('../controller/postController');
 const userController = require('../controller/userController');
+const {cacheInit} = require('../middlewares/cache')
 
 
 router.post('/addPost', middlewareAuth.isLoggedIn, fileController.upload, postController.createPost);
@@ -13,7 +14,7 @@ router.post('/editPost/:post_id', middlewareAuth.isLoggedIn, fileController.uplo
 
 router.post('/replyPost/:post_id', middlewareAuth.isLoggedIn, postController.replyPost);
 
-router.get('/:id', middlewareAuth.isLoggedIn,  userController.postView);
+router.get('/:id', middlewareAuth.isLoggedIn, cacheInit, userController.postView);
 
 router.get('/send_post/', middlewareAuth.isLoggedIn, (req, res)=>{return res.render('send_post');});
 

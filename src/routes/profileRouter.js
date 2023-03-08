@@ -7,6 +7,8 @@ const profileController = require('../controller/profileController');
 //-------------------------------------------------------MIDLEWARES--------------------------------------------------------------------
 const middlewareAuth = require('../middlewares/isLoggedin');
 const uploadImage = require('../middlewares/uploadImage');
+const {cacheInit} = require('../middlewares/cache');
+
 
 //router.get('/addProfile', middlewareAuth.isLoggedIn, profileController.addProfile);
 
@@ -18,7 +20,7 @@ router.post('/addProfile', middlewareAuth.isLoggedIn, profileController.addProfi
 
 router.post('/uploadProfileImage', middlewareAuth.isLoggedIn, uploadImage.upload, profileController.uploadProfilePhoto);
 
-router.get('/:username',  middlewareAuth.isLoggedIn, profileController.profile);
+router.get('/:username',  middlewareAuth.isLoggedIn, cacheInit, profileController.profile);
 
 router.post('/follow/:username', middlewareAuth.isLoggedIn, profileController.follow);
 

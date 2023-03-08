@@ -7,6 +7,8 @@ const userController = require('../controller/userController');
 //-------------------------------------------------------MIDLEWARES--------------------------------------------------------------------
 const middlewareValidate = require('../middlewares/validations');
 const middlewareAuth = require('../middlewares/isLoggedin');
+const {cacheInit} = require('../middlewares/cache');
+
 
 router.post('/register', middlewareValidate.validatorRegister, userController.register);
 
@@ -32,7 +34,7 @@ router.post('/login', middlewareValidate.validatorLogin, userController.login);
 
 router.get('/logout', middlewareAuth.isLoggedIn, userController.logout);
 
-router.get('/home', middlewareAuth.isLoggedIn, userController.home);
+router.get('/home', middlewareAuth.isLoggedIn, cacheInit, userController.home);
 
 router.get('/getCurrentUser', middlewareAuth.isLoggedIn, userController.getCurrentUser);
 
