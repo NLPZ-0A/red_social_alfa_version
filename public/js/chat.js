@@ -4,6 +4,7 @@ $(document).ready(()=>{
     var user;
     var receiver = [];
 
+
 $(document).on('click','#sendMessage', async function(){
         let User = await getData();
        
@@ -118,7 +119,7 @@ socket.on('nuevo mensaje', async(data) =>{
         console.log(data.msg);
 
 
-        let friends = document.querySelectorAll('.user-friend');
+    let friends = document.querySelectorAll('.user-friend');
     let id_receiver;
 
       friends.forEach(element =>{
@@ -189,6 +190,8 @@ socket.on('nuevo mensaje', async(data) =>{
                 if(user.username === currentUser.user.username && data.msg.length > 0){
                   chatContainer.append(myMessage);
                 }else if(user.username !== currentUser.user.username && data.msg.length > 0){
+                  const audio = new Audio('./sounds/SD_ALERT_30.mp3');
+                  audio.play();
                   chatContainer.append(herMessage);
                 }
   });
