@@ -4,11 +4,11 @@ const cookierParser = require('cookie-parser');
 const path = require('path');//manipulacion de los directorios
 const expressLayouts =  require('express-ejs-layouts');
 const csurf = require('csurf');
-
-//const xss = require('xss');
+const compression = require('compression');
 
 const app = require('./server');//llamo al servidor
 
+app.use(compression())
 app.use(cookierParser());
 
 const viewsPath = path.join(__dirname, './src/views')

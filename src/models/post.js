@@ -9,7 +9,6 @@ module.exports = class Post {
             this.file = file ;
             this.user_id = user_id;
             this.to_user_id = to_user_id;
-            this.category_post = 0;
             this.to_id_post = to_id_post;
             this.originalContent = originalContent;
             this.dateReply = dateReply
@@ -56,7 +55,7 @@ module.exports = class Post {
              fileRoute = `/files/${this.file}`;
             }
 
-            let query =`INSERT INTO post SET title=${db.escape(this.title)}, content=${db.escape(this.body)}, file=${db.escape(fileRoute)}, user_id='${db.escape(this.user_id)}', category_id=0, created_at=${db.escape(date)}`;
+            let query =`INSERT INTO post SET title=${db.escape(this.title)}, content=${db.escape(this.body)}, file=${db.escape(fileRoute)}, user_id='${db.escape(this.user_id)}', category_id = 0, created_at=${db.escape(date)}`;
 
             return await this.doQuery(query);
         }
