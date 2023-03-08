@@ -36,7 +36,8 @@ const request = (username, type) => {
     }).then((response) => {
         if(response.ok){
             $('#onload').fadeOut();
-            location.reload();
+            console.log(type);
+            window.location.reload();
         }
     }).catch(err => {
         $('#onload').fadeOut();

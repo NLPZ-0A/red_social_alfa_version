@@ -5,9 +5,14 @@ let closePopup = document.querySelector("#btn-cerrar-popup");
 let submitButtonProf = document.querySelector('.overlay.photo  input.btn-submit');
 let formImage = document.querySelector('.form-image');
 
+
+try{
 photoButton.addEventListener('click', () => {
     overlayProfilePhoto.classList.add('active');
 });
+}catch(err){
+    console.log(err);
+}
 
 submitButtonProf.addEventListener('click', (e)=>{
     e.preventDefault();

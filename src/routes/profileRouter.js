@@ -20,7 +20,7 @@ router.post('/addProfile', middlewareAuth.isLoggedIn, profileController.addProfi
 
 router.post('/uploadProfileImage', middlewareAuth.isLoggedIn, uploadImage.upload, profileController.uploadProfilePhoto);
 
-router.get('/:username',  middlewareAuth.isLoggedIn, cacheInit, profileController.profile);
+router.get('/:username',  middlewareAuth.isLoggedIn,  profileController.profile);
 
 router.post('/follow/:username', middlewareAuth.isLoggedIn, profileController.follow);
 

@@ -208,6 +208,22 @@ Copiar esto
     background: linear-gradient(45deg, #FF2DFD, #40A7FF);
 }
 
+.box-info-profile{
+    
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1.5rem 2rem;
+    padding: 1.5rem 4rem;
+    box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+    background-color: #fff;
+    width: 100%;
+    height: 180px;
+    border-radius: 15px;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 /* adactacion a dispositivos */
 @media (max-width: 750px) {
     .seccion-perfil-usuario .lista-datos {

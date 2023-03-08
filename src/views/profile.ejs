@@ -115,13 +115,14 @@
                         <% if(!profileData.descripcion) { %>
                             <p class="texto"><%= profileData.descripcion %></p>
                         <% }else {%> 
-                            <p class="texto">No existe ninguna descripcion en este momento :(</p>
+                            <p class="texto" style="text-align: center;">No existe ninguna descripcion en este momento :(</p>
                         <% } %> 
                     <% }else { %> 
-                        <p class="texto">No existe ninguna descripcion en este momento :(</p>
+                        <p class="texto" style="text-align: center;">No existe ninguna descripcion en este momento :(</p>
                     <% } %> 
                 </div>
-
+            
+            <% if (currentUser.username === user.username || (currentUser.username !== user.username && followData.follow)) { %>
                 <% if(profileData) {%>
                     <div class="perfil-usuario-footer">
                         <ul class="lista-datos">
@@ -177,6 +178,7 @@
                         </ul>
                     </div>
                 <% } %>
+                <% } %>
 
 
                 <div class="redes-sociales">
@@ -199,24 +201,30 @@
                     <a href="" class="boton-redes twitter fab fa-twitter"><i class="icon-twitter"></i></a>
                     <a href="" class="boton-redes instagram fab fa-instagram"><i class="icon-instagram"></i></a>-->
                 </div>
+
+
+                <% if (!(currentUser.username === user.username || (currentUser.username !== user.username && followData.follow))) { %>
+                    <div class="box-info-profile">
+                        <div class="circle">
+                            <i class='bx bx-block' style="font-size: 100px; text-align: center;"></i>
+                        </div>
+                        <div class="texto">
+                            <p>No se pueden mostrar los post de este perfil ya que necesitas seguirlo</p>
+                        </div>
+                    </div>
+                    
+                <% } %>
             </div>
-
-
-    
-
-
-            
+        
         </section>
 
         <% if (currentUser.username === user.username || (currentUser.username !== user.username && followData.follow)) { %>
 
             <%- include('./partials/posts'); %>
 
-          <% } else { %>
-            
-            No se pueden mostrar los post de este perfil ya que necesitas seguirlo
-
           <% } %>
+
+        
 
           <script src="/js/load.js"></script>
           <script src="/js/profile.js"></script>

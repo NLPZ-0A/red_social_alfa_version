@@ -472,6 +472,7 @@ nav ul li a{
   }
 
 .box-friends > .search-container{
+    display: flex;
     border-radius: 4px;
     font-size: 13px;
     padding: 5px;
@@ -506,6 +507,7 @@ nav ul li a{
   }
   
   .box-friends .search-container .input-search{
+      
       border-radius: 4px;
       font-size: 13px;
       background-color: #dad9e0;
