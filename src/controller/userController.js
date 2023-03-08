@@ -96,6 +96,7 @@ const home =  async (req, res)=>{
         const friends = await userInstance.getFollowedsUsers(currentUser.id);
 
         const postsWithLikes = await Promise.all(postsObject.map(async post => {
+            console.log(post.id)
             //const likes = await postsFilter.getLikes(currentUser.id);
             const likes = await postInstance.getLikeforPost(post.id);  
             const likesReq = await postInstance.getLikes(post.id);

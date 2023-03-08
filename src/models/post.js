@@ -56,7 +56,7 @@ module.exports = class Post {
              fileRoute = `/files/${this.file}`;
             }
 
-            let query =`INSERT INTO post SET title=${db.escape(this.title)}, content=${db.escape(this.body)}, file=${db.escape(fileRoute)}, user_id='${db.escape(this.user_id)}', category_id = 0, created_at=${db.escape(date)}`;
+            let query =`INSERT INTO post SET title=${db.escape(this.title)}, content=${db.escape(this.body)}, file=${db.escape(fileRoute)}, user_id='${db.escape(this.user_id)}', category_id=0, created_at=${db.escape(date)}`;
 
             return await this.doQuery(query);
         }
