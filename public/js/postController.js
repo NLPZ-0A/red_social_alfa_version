@@ -137,8 +137,13 @@ $(document).on('click','.post-menu-button.edit', function() {
 //-------------------------------------compartir post-----------------------------------------
 $(document).on('click','.post-ico.compartir', function() {
     let id = this.id;
-    overlayReply.classList.add('active');
-    submitReplyPost.setAttribute("id", id);
+    if(overlayReply){
+        overlayReply.classList.add('active');
+        submitReplyPost.setAttribute("id", id);
+    }else{
+        submitReplyData('', id);
+        location.replace(`${location.origin}/home`);
+    }
 });
     
 
